@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <title>Przykładowa strona</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h1>Transakcje</h1>
+
+    <div class="sekcja">
+        <h2>Filtruj</h2>
+
+        <form>
+            <label for="dod">Data od:</label><br>
+            <input type="text" id="dod" name="dod" value="2024-04-01"><br>
+            <label for="ddo">Data do:</label><br>
+            <input type="text" id="ddo" name="ddo" value="2024-04-31"><br>
+            <label for="typ">Typ:</label><br>
+            <input type="text" id="typ" name="typ" value="Wydatek"><br>
+            <label for="kat">Kategoria:</label><br>
+            <input type="text" id="kat" name="kat" value="Jedzenie"><br><br>
+            <input type="submit" value="Filtruj">
+        </form>
+
+    </div>
+
+    <div class="sekcja">
+        <h2>Podsumowanie</h2>
+
+        <div class="sumaryczne">
+            <p class="typ">Przychody</p>
+            <p>3000</p>
+        </div>
+
+        <div class="sumaryczne">
+            <p class="typ">Wydatki</p>
+            <p>2000</p>
+        </div>
+
+        <div class="sumaryczne">
+            <p class="typ">Bilans</p>
+            <p>1000</p>
+        </div>
+    </div>
+
+    <div class="sekcja">
+        <h2>Historia transakcji</h2>
+
+        <div>
+            <p>Dodaj transakcję</p>
+            <form>
+                <label for="dat">Data:</label><br>
+                <input type="text" id="dat" name="dat" value="2024-04-01"><br>
+                <label for="war">Wartość:</label><br>
+                <input type="text" id="war" name="war" value="100"><br>
+                <label for="typp">Typ:</label><br>
+                <input type="text" id="typ" name="typp" value="Wydatek"><br>
+                <label for="katt">Kategoria:</label><br>
+                <input type="text" id="kat" name="katt" value="Jedzenie"><br><br>
+                <input type="submit" value="Dodaj">
+            </form>
+        </div><br><br>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Wartość</th>
+                <th>Typ</th>
+                <th>Kategoria</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2024-04-01</td>
+                <td>20</td>
+                <td>Wydatek</td>
+                <td>Jedzenie</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2024-04-02</td>
+                <td>100</td>
+                <td>Wydatek</td>
+                <td>Bilety</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2024-04-02</td>
+                <td>1000</td>
+                <td>Przychód</td>
+                <td>Pensja</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2024-04-03</td>
+                <td>500</td>
+                <td>Wydatek</td>
+                <td>Rachunki</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="view.js"></script>
+</body>
+
+</html>
