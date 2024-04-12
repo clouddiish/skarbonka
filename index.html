@@ -5,109 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
-    <title>Przykładowa strona</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="style.css" />
+
+    <title>Skarbonka</title>
 </head>
 
 <body>
-    <h1>Transakcje</h1>
+    <h1 class="m-5">Transakcje</h1>
 
-    <div class="sekcja">
-        <h2>Filtruj</h2>
-
-        <form>
-            <label for="dod">Data od:</label><br>
-            <input type="text" id="dod" name="dod" value="2024-04-01"><br>
-            <label for="ddo">Data do:</label><br>
-            <input type="text" id="ddo" name="ddo" value="2024-04-31"><br>
-            <label for="typ">Typ:</label><br>
-            <input type="text" id="typ" name="typ" value="Wydatek"><br>
-            <label for="kat">Kategoria:</label><br>
-            <input type="text" id="kat" name="kat" value="Jedzenie"><br><br>
-            <input type="submit" value="Filtruj">
+    <div class="m-5 container">
+        <h3>Dodaj transakcję</h3>
+        <form class="my-3">
+            <div class="row">
+                <div class="col">
+                    <label for="dat">Data:</label><br>
+                    <input type="text" id="dat" name="dat" value="2024-04-01"><br>
+                </div>
+                <div class="col">
+                    <label for="war">Wartość:</label><br>
+                    <input type="text" id="war" name="war" value="100"><br>
+                </div>
+                <div class="col">
+                    <label for="typp">Typ:</label><br>
+                    <input type="text" id="typ" name="typp" value="Wydatek"><br>
+                </div>
+                <div class="col">
+                    <label for="katt">Kategoria:</label><br>
+                    <input type="text" id="kat" name="katt" value="Jedzenie"><br><br>
+                </div>
+            </div>
+            <input type="submit" value="Dodaj">
         </form>
-
     </div>
 
-    <div class="sekcja">
-        <h2>Podsumowanie</h2>
 
-        <div class="sumaryczne">
-            <p class="typ">Przychody</p>
-            <p>3000</p>
-        </div>
 
-        <div class="sumaryczne">
-            <p class="typ">Wydatki</p>
-            <p>2000</p>
-        </div>
+    <div class="container m-5">
+        <h2>Historia</h2>
 
-        <div class="sumaryczne">
-            <p class="typ">Bilans</p>
-            <p>1000</p>
-        </div>
-    </div>
+        <div class="my-4">
+            <h3>Filtruj</h3>
 
-    <div class="sekcja">
-        <h2>Historia transakcji</h2>
+            <form class="my-3">
+                <div class="row">
+                    <div class="col">
+                        <label for="dod">Data od:</label><br>
+                        <input type="text" id="dod" name="dod" value="2024-04-01"><br>
+                    </div>
 
-        <div>
-            <p>Dodaj transakcję</p>
-            <form>
-                <label for="dat">Data:</label><br>
-                <input type="text" id="dat" name="dat" value="2024-04-01"><br>
-                <label for="war">Wartość:</label><br>
-                <input type="text" id="war" name="war" value="100"><br>
-                <label for="typp">Typ:</label><br>
-                <input type="text" id="typ" name="typp" value="Wydatek"><br>
-                <label for="katt">Kategoria:</label><br>
-                <input type="text" id="kat" name="katt" value="Jedzenie"><br><br>
-                <input type="submit" value="Dodaj">
+                    <div class="col">
+                        <label for="ddo">Data do:</label><br>
+                        <input type="text" id="ddo" name="ddo" value="2024-04-31"><br>
+                    </div>
+
+                    <div class="col">
+                        <label for="typ">Typ:</label><br>
+                        <input type="text" id="typ" name="typ" value="Wydatek"><br>
+                    </div>
+
+                    <div class="col">
+                        <label for="kat">Kategoria:</label><br>
+                        <input type="text" id="kat" name="kat" value="Jedzenie"><br><br>
+                    </div>
+                </div>
+                <input type="submit" value="Filtruj">
             </form>
-        </div><br><br>
+        </div>
 
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Data</th>
-                <th>Wartość</th>
-                <th>Typ</th>
-                <th>Kategoria</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>2024-04-01</td>
-                <td>20</td>
-                <td>Wydatek</td>
-                <td>Jedzenie</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>2024-04-02</td>
-                <td>100</td>
-                <td>Wydatek</td>
-                <td>Bilety</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>2024-04-02</td>
-                <td>1000</td>
-                <td>Przychód</td>
-                <td>Pensja</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>2024-04-03</td>
-                <td>500</td>
-                <td>Wydatek</td>
-                <td>Rachunki</td>
-            </tr>
-        </table>
+        <div class="my-5">
+            <h3 class="mb-4">Podsumowanie</h3>
+
+            <div class="row my-3">
+                <div class="col">
+                    <div class="border rounded pt-1">
+                        <p class="typ text-center">Przychody</p>
+                        <p class="text-center">3000</p>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="border rounded pt-1">
+                        <p class="typ text-center">Wydatki</p>
+                        <p class="text-center">2000</p>
+                    </div>
+                </div>
+
+                <div class="col ">
+                    <div class="border rounded pt-1">
+                        <p class="typ text-center">Bilans</p>
+                        <p class="text-center">1000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-5">
+            <h3>Lista transakcji</h3>
+            <table class="table my-3">
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Wartość</th>
+                    <th>Typ</th>
+                    <th>Kategoria</th>
+                    <th>Usuń</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-01</td>
+                    <td>20</td>
+                    <td>Wydatek</td>
+                    <td>Jedzenie</td>
+                    <td>
+                        <button type="button" class="btn btn-light">Usuń</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2024-04-02</td>
+                    <td>100</td>
+                    <td>Wydatek</td>
+                    <td>Bilety</td>
+                    <td>
+                        <button type="button" class="btn btn-light">Usuń</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>2024-04-02</td>
+                    <td>1000</td>
+                    <td>Przychód</td>
+                    <td>Pensja</td>
+                    <td>
+                        <button type="button" class="btn btn-light">Usuń</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>2024-04-03</td>
+                    <td>500</td>
+                    <td>Wydatek</td>
+                    <td>Rachunki</td>
+                    <td>
+                        <button type="button" class="btn btn-light">Usuń</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
     </div>
 
+    <!--MVC script-->
     <script src="view.js"></script>
+
+    <!--Bootstrap scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>
