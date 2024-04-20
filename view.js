@@ -1,23 +1,26 @@
-// let fdataOd;
+const view = {
 
-// document.getElementById("fdodBTN").onclick = function(){
-// 	fdataOd = document.getElementById("fdataod").value;
-// }
+	init() {
+		this.ftyp = document.getElementById("ftyp");
+		this.ftypBTN = document.getElementById("ftypBTN");
+		this.ftypValue = null;
 
-// let fdataDo;
+		this.fkategoria = document.getElementById("fkat");
+		this.fkategoriaBTN = document.getElementById("fkatBTN");
+		this.fkategoriaValue = null;
 
-// document.getElementById("fddoBTN").onclick = function(){
-// 	fdataDo = document.getElementById("fdatado").value;
-// }
+		// po naciśnięciu guzików aktualizacja wartości
+		this.ftypBTN.addEventListener("click", () => {
+            this.ftypValue = this.ftyp.value;
+		});
 
-let ftyp;
+		this.fkategoriaBTN.addEventListener("click", () => {
+            this.fkategoriaValue = this.fkategoria.value;
+		});
 
-document.getElementById("ftypBTN").onclick = function(){
-	ftyp = document.getElementById("ftyp").value;
+
+	},
+
 }
 
-let fkategoria;
-
-document.getElementById("fkatBTN").onclick = function(){
-	fkategoria = document.getElementById("fkat").value;
-}
+view.init();
