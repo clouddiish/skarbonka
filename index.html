@@ -20,7 +20,40 @@
 
     <div class="m-5 container">
         <h3>Dodaj transakcję</h3>
-        <form class="my-3">
+
+        <div class="row">
+
+            <div class="col">
+                <label>Data: </label><br>
+                <input id="data" placeholder="2024-04-01"><br>
+                <!-- <button id="dataBTN">Zapisz</button> -->
+            </div>
+
+            <div class="col">
+                <label>Wartość: </label><br>
+                <input id="wartosc" placeholder="20"><br>
+                <!-- <button id="wartoscBTN">Zapisz</button> -->
+            </div>
+
+            <div class="col">
+                <label>Typ: </label><br>
+                <input id="dtyp" placeholder="Wydatek/Przychód"><br>
+                <!-- <button id="dtypBTN">Zapisz</button> -->
+            </div>
+
+            <div class="col">
+                <label>Kategoria: </label><br>
+                <input id="dkat" placeholder="Jedzenie"><br>
+                <!-- <button id="dkatBTN">Zapisz</button> -->
+            </div>
+
+            <button id="dodajBTN">Dodaj</button>
+
+        </div>
+
+
+
+        <!-- <form class="my-3">
             <div class="row">
                 <div class="col">
                     <label for="dat">Data:</label><br>
@@ -40,7 +73,7 @@
                 </div>
             </div>
             <input type="submit" value="Dodaj">
-        </form>
+        </form> -->
     </div>
 
 
@@ -68,14 +101,14 @@
                 <div class="col">
                     <label>Typ: </label><br>
                     <input id="ftyp" placeholder="Wydatek/Przychód"><br>
-                    <button id="ftypBTN">Filtruj</button>
                 </div>
 
                 <div class="col">
                     <label>Kategoria: </label><br>
                     <input id="fkat" placeholder="Jedzenie"><br>
-                    <button id="fkatBTN">Filtruj</button>
                 </div>
+
+                <button id="filtrujBTN">Filtruj</button>
 
             </div>
 
@@ -112,7 +145,7 @@
             <h3>Lista transakcji</h3>
             <table class="table my-3" id="tabela_transakcji">
                 <tr>
-                    <th>ID</th>
+                    <!-- <th>ID</th> -->
                     <th>Data</th>
                     <th>Wartość</th>
                     <th>Typ</th>
@@ -120,7 +153,7 @@
                     <th>Usuń</th>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <!-- <td>1</td> -->
                     <td>2024-04-01</td>
                     <td>20</td>
                     <td>Wydatek</td>
@@ -130,7 +163,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>2</td>
+                    <!-- <td>2</td> -->
                     <td>2024-04-02</td>
                     <td>100</td>
                     <td>Wydatek</td>
@@ -140,7 +173,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>3</td>
+                    <!-- <td>3</td> -->
                     <td>2024-04-02</td>
                     <td>1000</td>
                     <td>Przychód</td>
@@ -150,7 +183,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>4</td>
+                    <!-- <td>4</td> -->
                     <td>2024-04-03</td>
                     <td>500</td>
                     <td>Wydatek</td>
