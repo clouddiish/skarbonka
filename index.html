@@ -51,30 +51,34 @@
         <div class="my-4">
             <h3>Filtruj</h3>
 
-            <form class="my-3">
-                <div class="row">
-                    <div class="col">
-                        <label for="dod">Data od:</label><br>
-                        <input type="text" id="dod" name="dod" value="2024-04-01"><br>
-                    </div>
+            <div class="row">
 
-                    <div class="col">
-                        <label for="ddo">Data do:</label><br>
-                        <input type="text" id="ddo" name="ddo" value="2024-04-31"><br>
-                    </div>
+                <!-- <div class="col">
+                    <label>Data od: </label><br>
+                    <input id="fdataod"><br>
+                    <button id="fdodBTN">Filtruj</button>
+                </div> -->
 
-                    <div class="col">
-                        <label for="typ">Typ:</label><br>
-                        <input type="text" id="typ" name="typ" value="Wydatek"><br>
-                    </div>
+                <!-- <div class="col">
+                    <label>Data do: </label><br>
+                    <input id="fdatado"><br>
+                    <button id="fddoBTN">Filtruj</button>
+                </div> -->
 
-                    <div class="col">
-                        <label for="kat">Kategoria:</label><br>
-                        <input type="text" id="kat" name="kat" value="Jedzenie"><br><br>
-                    </div>
+                <div class="col">
+                    <label>Typ: </label><br>
+                    <input id="ftyp" placeholder="Wydatek/Przychód"><br>
+                    <button id="ftypBTN">Filtruj</button>
                 </div>
-                <input type="submit" value="Filtruj">
-            </form>
+
+                <div class="col">
+                    <label>Kategoria: </label><br>
+                    <input id="fkat" placeholder="Jedzenie"><br>
+                    <button id="fkatBTN">Filtruj</button>
+                </div>
+
+            </div>
+
         </div>
 
         <div class="my-5">
@@ -84,21 +88,21 @@
                 <div class="col">
                     <div class="border rounded pt-1">
                         <p class="typ text-center">Przychody</p>
-                        <p class="text-center">3000</p>
+                        <p class="text-center" id="sumaPrzychodow">3000</p>
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="border rounded pt-1">
                         <p class="typ text-center">Wydatki</p>
-                        <p class="text-center">2000</p>
+                        <p class="text-center" id="sumaWydatkow">2000</p>
                     </div>
                 </div>
 
                 <div class="col ">
                     <div class="border rounded pt-1">
                         <p class="typ text-center">Bilans</p>
-                        <p class="text-center">1000</p>
+                        <p class="text-center" id="wartoscBilansu">1000</p>
                     </div>
                 </div>
             </div>
@@ -106,7 +110,7 @@
 
         <div class="my-5">
             <h3>Lista transakcji</h3>
-            <table class="table my-3">
+            <table class="table my-3" id="tabela_transakcji">
                 <tr>
                     <th>ID</th>
                     <th>Data</th>
