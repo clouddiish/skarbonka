@@ -3,11 +3,11 @@ const view = {
 	init() {
 		this.ftyp = document.getElementById("ftyp");
 		this.ftypBTN = document.getElementById("ftypBTN");
-		this.ftypValue = null;
+		this.ftypValue = "";
 
 		this.fkategoria = document.getElementById("fkat");
 		this.fkategoriaBTN = document.getElementById("fkatBTN");
-		this.fkategoriaValue = null;
+		this.fkategoriaValue = "";
 
 		// po naciśnięciu guzików aktualizacja wartości
 		this.ftypBTN.addEventListener("click", () => {
