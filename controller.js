@@ -8,3 +8,4 @@ const controller = {
 }
 
 controller.init(); // start the controller = start the app
+

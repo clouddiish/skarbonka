@@ -31,7 +31,7 @@ const view = {
 
 		this.filtrujBTN = document.getElementById("filtrujBTN");
 
-		// po naciśnięciu guzików aktualizacja wartości
+		// po naciśnięciu guzika aktualizacja wartości
 		this.filtrujBTN.addEventListener("click", () => {
             this.ftypValue = this.ftyp.value;
 			this.fkategoriaValue = this.fkategoria.value;
