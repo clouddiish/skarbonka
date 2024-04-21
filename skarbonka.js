@@ -8,31 +8,31 @@ const model = {
     transakcje: [
         {
             data: "2024-04-16",
-            wartość: 20,
+            wartosc: 20,
             typ: "wydatek",
             kategoria: "jedzenie"
         },
         {
             data: "2024-04-15",
-            wartość: 30,
+            wartosc: 30,
             typ: "wydatek",
             kategoria: "jedzenie"
         },
         {
             data: "2024-04-16",
-            wartość: 200,
+            wartosc: 200,
             typ: "wydatek",
             kategoria: "lekarz"
         },
         {
             data: "2024-04-16",
-            wartość: 1000,
+            wartosc: 1000,
             typ: "przychód",
             kategoria: "Pensja"
         },
         {
             data: "2024-04-16",
-            wartość: 100000,
+            wartosc: 100000,
             typ: "przychód",
             kategoria: "Babcia"
         }
@@ -128,15 +128,21 @@ const controller = {
         return model.sumaPrzychodow;
     },
 
-    // setSumaTransakcji(typp, katt) {
-    //     let suma = 0;
-    //     for (transakcja of this.getTransakcjeByFiltry(typp, katt)) {
-    //         if (transakcja.typ == "przychód") suma = suma + transakcja.wartosc;
-    //     }
+    setSumaTransakcji(typp, katt) {
+        let suma = 0;
 
-    //     if(typp === "przychód")
-    //     model.sumaPrzychodow = suma;
-    // }
+        for (transakcja of this.getTransakcjeByFiltry(typp, katt)) {
+            if (transakcja.typ == typp) suma = suma + transakcja.wartosc;
+        }
+
+        console.log(suma);
+
+        if (typp === "przychód") {
+            model.sumaPrzychodow = suma;
+        } else if (typp === "wydatek") {
+            model.sumaWydatkow = suma;
+        }
+    }
 
 }
 
