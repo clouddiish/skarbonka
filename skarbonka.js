@@ -135,8 +135,6 @@ const controller = {
             if (transakcja.typ == typp) suma = suma + transakcja.wartosc;
         }
 
-        console.log(suma);
-
         if (typp === "przychód") {
             model.sumaPrzychodow = suma;
         } else if (typp === "wydatek") {
