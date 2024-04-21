@@ -1,6 +1,6 @@
 const model = {
-    filtrujTyp: "",
-    filtrujKategoria: "",
+    filtrTyp: "",
+    filtrKategoria: "",
 
     transakcje: [
         {
@@ -57,6 +57,11 @@ const view = {
 
     },
 
+    render(){
+        const filtrTyp = controller.getFiltrTyp();
+        const filtrKategoria = controller.getFiltrKategoria();
+    }
+
 }
 
 const controller = {
@@ -64,9 +69,17 @@ const controller = {
         view.init();
     },
 
+    getFiltrTyp(){
+        return model.filtrTyp;
+    },
+
+    getFiltrKategoria(){
+        return model.filtrKategoria;
+    },
+
     setFiltry(){
-        model.filtrujTyp = view.ftyp.value;
-        model.filtrujKategoria = view.fkategoria.value;
+        model.filtrTyp = view.ftyp.value;
+        model.filtrKategoria = view.fkategoria.value;
     },
 
     addTransakcja(){
@@ -78,8 +91,13 @@ const controller = {
         nowaTransakcja.kategoria = view.dkategoria.value;
 
         model.transakcje.push(nowaTransakcja);
-    }
+    },
 
+    getTransakcjeByFiltry(typp, katt){
+        return model.transakcje.filter(
+            (transakcja) => {return (transakcja.typ == typp) && (transakcja.kategoria == katt)}
+        );
+    }
 
 
 }
