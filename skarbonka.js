@@ -1,11 +1,20 @@
 const model = {
     filtrTyp: "",
     filtrKategoria: "",
+    sumaPrzychodow: 0,
+    sumaWydatkow: 0,
+    bilans: 0,
 
     transakcje: [
         {
             data: "2024-04-16",
             wartość: 20,
+            typ: "wydatek",
+            kategoria: "jedzenie"
+        },
+        {
+            data: "2024-04-15",
+            wartość: 30,
             typ: "wydatek",
             kategoria: "jedzenie"
         },
@@ -57,7 +66,7 @@ const view = {
 
     },
 
-    render(){
+    render() {
         const filtrTyp = controller.getFiltrTyp();
         const filtrKategoria = controller.getFiltrKategoria();
     }
@@ -65,24 +74,24 @@ const view = {
 }
 
 const controller = {
-    init(){
+    init() {
         view.init();
     },
 
-    getFiltrTyp(){
+    getFiltrTyp() {
         return model.filtrTyp;
     },
 
-    getFiltrKategoria(){
+    getFiltrKategoria() {
         return model.filtrKategoria;
     },
 
-    setFiltry(){
+    setFiltry() {
         model.filtrTyp = view.ftyp.value;
         model.filtrKategoria = view.fkategoria.value;
     },
 
-    addTransakcja(){
+    addTransakcja() {
         nowaTransakcja = {};
 
         nowaTransakcja.data = view.data.value;
@@ -93,12 +102,41 @@ const controller = {
         model.transakcje.push(nowaTransakcja);
     },
 
-    getTransakcjeByFiltry(typp, katt){
-        return model.transakcje.filter(
-            (transakcja) => {return (transakcja.typ == typp) && (transakcja.kategoria == katt)}
-        );
-    }
+    getTransakcjeByFiltry(typp, katt) {
+        if ((typp === "") && (katt === "")) {
+            return model.transakcje;
 
+        } else if ((typp !== "") && (katt === "")) {
+            return model.transakcje.filter(
+                (transakcja) => { return (transakcja.typ == typp) }
+            );
+
+        } else if ((typp === "") && (katt !== "")) {
+            return model.transakcje.filter(
+                (transakcja) => { return (transakcja.kategoria == katt) }
+            );
+
+        } else {
+            return model.transakcje.filter(
+                (transakcja) => { return (transakcja.typ == typp) && (transakcja.kategoria == katt) }
+            );
+        }
+
+    },
+
+    getSumaPrzychodow() {
+        return model.sumaPrzychodow;
+    },
+
+    // setSumaTransakcji(typp, katt) {
+    //     let suma = 0;
+    //     for (transakcja of this.getTransakcjeByFiltry(typp, katt)) {
+    //         if (transakcja.typ == "przychód") suma = suma + transakcja.wartosc;
+    //     }
+
+    //     if(typp === "przychód")
+    //     model.sumaPrzychodow = suma;
+    // }
 
 }
 
