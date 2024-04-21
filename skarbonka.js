@@ -102,7 +102,7 @@ const controller = {
         model.transakcje.push(nowaTransakcja);
     },
 
-    getTransakcjeByFiltry(typp, katt) {
+    getTransakcjeByFiltry(typp = "", katt = "") {
         if ((typp === "") && (katt === "")) {
             return model.transakcje;
 
@@ -128,10 +128,14 @@ const controller = {
         return model.sumaPrzychodow;
     },
 
+    getSumaWydatkow() {
+        return model.sumaWydatkow;
+    },
+
     setSumaTransakcji(typp, katt) {
         let suma = 0;
 
-        for (transakcja of this.getTransakcjeByFiltry(typp, katt)) {
+        for (let transakcja of this.getTransakcjeByFiltry(typp, katt)) {
             if (transakcja.typ == typp) suma = suma + transakcja.wartosc;
         }
 
@@ -140,8 +144,11 @@ const controller = {
         } else if (typp === "wydatek") {
             model.sumaWydatkow = suma;
         }
-    }
+    },
 
+    setBilans() {
+        return model.bilans = this.getSumaPrzychodow() - this.getSumaWydatkow();
+    }
 }
 
 controller.init();
