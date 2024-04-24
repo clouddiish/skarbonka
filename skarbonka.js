@@ -65,9 +65,6 @@ const view = {
     // metoda do inicjacji view
     init() {
 
-        // aktualizuj elementy DOMu
-        this.setDOM();
-
         // uzupełnij dane na podstawie wszystkich transakcji
         this.updateWartosci();
 
