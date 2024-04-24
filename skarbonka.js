@@ -66,15 +66,31 @@ const view = {
         this.filtrujBTN = document.getElementById("filtrujBTN");
 
         // po naciśnięciu guzika aktualizacja wartości
-        this.filtrujBTN.addEventListener("click", () => controller.setFiltry());
+        this.filtrujBTN.addEventListener("click", () => {
+            controller.setFiltry();
+            controller.setWszystko();
+            this.sumaPrzychodow.innerHTML = controller.getSumaPrzychodow();
+        });
 
+
+        // WARTOŚCI PODSUMOWUJĄCE
+
+        // zapisanie wskaźników do wartości podsumowujących
+        this.sumaPrzychodow = document.getElementById("sumaPrzychodow");
+        this.sumaWydatkow = document.getElementById("sumaWydatkow");
+        this.wartoscBilansu = document.getElementById("wartoscBilansu");
+
+        // this.render();
     },
 
     // metoda do aktualizowania HTMLa
-    render() {
-        const filtrTyp = controller.getFiltrTyp();
-        const filtrKategoria = controller.getFiltrKategoria();
-    }
+    // render() {
+    //     // const filtrTyp = controller.getFiltrTyp();
+    //     // const filtrKategoria = controller.getFiltrKategoria();
+
+    //     let aktualnePrzychody = controller.getSumaPrzychodow();
+    //     this.sumaPrzychodow.innerHTML = aktualnePrzychody;
+    // }
 
 }
 
@@ -147,7 +163,7 @@ const controller = {
     },
 
     // pobierz aktualny bilans z modelu
-    getBilans(){
+    getBilans() {
         return model.bilans;
     },
 
@@ -169,6 +185,13 @@ const controller = {
     // ustaw aktualny bilans
     setBilans() {
         return model.bilans = this.getSumaPrzychodow() - this.getSumaWydatkow();
+    },
+
+    // ustaw wszystkie potrzebne rzeczy po wyfiltrowaniu
+    setWszystko() {
+        this.setSumaTransakcji("przychód", view.fkategoria.value);
+        this.setSumaTransakcji("wydatek", view.fkategoria.value);
+        this.setBilans();
     }
 }
 
