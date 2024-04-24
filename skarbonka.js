@@ -1,10 +1,11 @@
 const model = {
-    filtrTyp: "",
-    filtrKategoria: "",
-    sumaPrzychodow: 0,
-    sumaWydatkow: 0,
-    bilans: 0,
+    filtrTyp: "",           // zapamiętanie aktualnego filtru typu transakcji
+    filtrKategoria: "",     // zapamiętanie aktualnego filtru kategorii transakcji
+    sumaPrzychodow: 0,      // aktualna suma przychodów po przefilrowaniu
+    sumaWydatkow: 0,        // aktualna suma wydatków po przefiltrowaniu
+    bilans: 0,              // aktualny bilans po przefiltrowaniu
 
+    // dane transakcji
     transakcje: [
         {
             data: "2024-04-16",
@@ -41,10 +42,12 @@ const model = {
 
 const view = {
 
+    // metoda do inicjacji view
     init() {
 
         // DODAWANIE TRANSAKCJI
 
+        // zapisanie wskaźników do formularzy i guzików
         this.data = document.getElementById("data");
         this.wartosc = document.getElementById("wartosc");
         this.dtyp = document.getElementById("dtyp");
@@ -57,6 +60,7 @@ const view = {
 
         // FILTROWANIE HISTORII TRANSAKCJI
 
+        // zapisanie wskaźników do formularzy i guzików
         this.ftyp = document.getElementById("ftyp");
         this.fkategoria = document.getElementById("fkat");
         this.filtrujBTN = document.getElementById("filtrujBTN");
@@ -66,6 +70,7 @@ const view = {
 
     },
 
+    // metoda do aktualizowania HTMLa
     render() {
         const filtrTyp = controller.getFiltrTyp();
         const filtrKategoria = controller.getFiltrKategoria();
@@ -74,23 +79,29 @@ const view = {
 }
 
 const controller = {
+    // metoda do inicjalizacji kontrolera
     init() {
+        // zainicjuj view
         view.init();
     },
 
+    // pobierz aktualny filtr typu z modelu
     getFiltrTyp() {
         return model.filtrTyp;
     },
 
+    // pobierz aktualny filtr kategorii z modelu
     getFiltrKategoria() {
         return model.filtrKategoria;
     },
 
+    // ustaw nowe filtry wybrane przez użytkownika w modelu
     setFiltry() {
         model.filtrTyp = view.ftyp.value;
         model.filtrKategoria = view.fkategoria.value;
     },
 
+    // dodaj nową transakcję wpisaną przez użytkownika do modelu 
     addTransakcja() {
         nowaTransakcja = {};
 
@@ -102,6 +113,7 @@ const controller = {
         model.transakcje.push(nowaTransakcja);
     },
 
+    // pobierz wyfiltrowaną tabelę wszystkich transakcji z modelu zgodnie z aktualnymi filtrami
     getTransakcjeByFiltry(typp = "", katt = "") {
         if ((typp === "") && (katt === "")) {
             return model.transakcje;
@@ -124,14 +136,22 @@ const controller = {
 
     },
 
+    // pobierz aktualną sumę przychodów z modelu 
     getSumaPrzychodow() {
         return model.sumaPrzychodow;
     },
 
+    // pobierz aktualną sumę wydatków z modelu 
     getSumaWydatkow() {
         return model.sumaWydatkow;
     },
 
+    // pobierz aktualny bilans z modelu
+    getBilans(){
+        return model.bilans;
+    },
+
+    // ustaw nową sumę transakcji o podanym typie i kategorii
     setSumaTransakcji(typp, katt) {
         let suma = 0;
 
@@ -146,9 +166,11 @@ const controller = {
         }
     },
 
+    // ustaw aktualny bilans
     setBilans() {
         return model.bilans = this.getSumaPrzychodow() - this.getSumaWydatkow();
     }
 }
 
+// inicjacja kontrolera
 controller.init();
