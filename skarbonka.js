@@ -42,25 +42,16 @@ const model = {
 
 const view = {
 
-    // metoda do inicjacji view
-    init() {
+    setDOM() {
 
-        // DODAWANIE TRANSAKCJI
-
-        // zapisanie wskaźników do formularzy i guzików
+        // zapisanie wskaźników do formularzy i guzików dodawania transakcji
         this.data = document.getElementById("data");
         this.wartosc = document.getElementById("wartosc");
         this.dtyp = document.getElementById("dtyp");
         this.dkategoria = document.getElementById("dkat");
         this.dodajBTN = document.getElementById("dodajBTN");
 
-        // po naciśnieciu guzika zapisanie wpisanych wartości do obiektu
-        this.dodajBTN.addEventListener("click", () => controller.addTransakcja());
-
-
-        // FILTROWANIE HISTORII TRANSAKCJI
-
-        // zapisanie wskaźników do formularzy i guzików
+        // zapisanie wskaźników do formularzy i guzików do filtrowania transakcji
         this.ftyp = document.getElementById("ftyp");
         this.fkategoria = document.getElementById("fkat");
         this.filtrujBTN = document.getElementById("filtrujBTN");
@@ -69,35 +60,48 @@ const view = {
         this.sumaPrzychodow = document.getElementById("sumaPrzychodow");
         this.sumaWydatkow = document.getElementById("sumaWydatkow");
         this.wartoscBilansu = document.getElementById("wartoscBilansu");
+    },
 
-        // po naciśnięciu guzika aktualizacja HTMLa
+    // metoda do inicjacji view
+    init() {
+
+        // aktualizuj elementy DOMu
+        this.setDOM();
+
+        // uzupełnij dane na podstawie wszystkich transakcji
+        this.updateWartosci();
+
+        // po naciśnieciu guzika "Dodaj" zapisanie wpisanych wartości do obiektu
+        this.dodajBTN.addEventListener("click", () => controller.addTransakcja());
+
+        // po naciśnięciu guzika "Filtruj" aktualizacja HTMLa
         this.filtrujBTN.addEventListener("click", () => {
             controller.setFiltry();
             controller.setWszystko();
-            this.sumaPrzychodow.innerHTML = controller.getSumaPrzychodow();
-            this.sumaWydatkow.innerHTML = controller.getSumaWydatkow();
-            this.wartoscBilansu.innerHTML = controller.getBilans();
+            this.updateWartosci();
         });
-
-        // this.render();
     },
 
-    // metoda do aktualizowania HTMLa
-    // render() {
-    //     // const filtrTyp = controller.getFiltrTyp();
-    //     // const filtrKategoria = controller.getFiltrKategoria();
-
-    //     let aktualnePrzychody = controller.getSumaPrzychodow();
-    //     this.sumaPrzychodow.innerHTML = aktualnePrzychody;
-    // }
+    updateWartosci() {
+        this.sumaPrzychodow.innerHTML = controller.getSumaPrzychodow();
+        this.sumaWydatkow.innerHTML = controller.getSumaWydatkow();
+        this.wartoscBilansu.innerHTML = controller.getBilans();
+    }
 
 }
 
 const controller = {
     // metoda do inicjalizacji kontrolera
     init() {
+        // ustaw sumy w modelu
+        this.setSumaTransakcji("przychód");
+        this.setSumaTransakcji("wydatek");
+        this.setBilans();
+
         // zainicjuj view
+        view.setDOM();
         view.init();
+
     },
 
     // pobierz aktualny filtr typu z modelu
@@ -167,7 +171,7 @@ const controller = {
     },
 
     // ustaw nową sumę transakcji o podanym typie i kategorii
-    setSumaTransakcji(typp, katt) {
+    setSumaTransakcji(typp, katt = "") {
         let suma = 0;
 
         for (let transakcja of this.getTransakcjeByFiltry(typp, katt)) {
