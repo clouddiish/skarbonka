@@ -65,20 +65,19 @@ const view = {
         this.fkategoria = document.getElementById("fkat");
         this.filtrujBTN = document.getElementById("filtrujBTN");
 
-        // po naciśnięciu guzika aktualizacja wartości
-        this.filtrujBTN.addEventListener("click", () => {
-            controller.setFiltry();
-            controller.setWszystko();
-            this.sumaPrzychodow.innerHTML = controller.getSumaPrzychodow();
-        });
-
-
-        // WARTOŚCI PODSUMOWUJĄCE
-
         // zapisanie wskaźników do wartości podsumowujących
         this.sumaPrzychodow = document.getElementById("sumaPrzychodow");
         this.sumaWydatkow = document.getElementById("sumaWydatkow");
         this.wartoscBilansu = document.getElementById("wartoscBilansu");
+
+        // po naciśnięciu guzika aktualizacja HTMLa
+        this.filtrujBTN.addEventListener("click", () => {
+            controller.setFiltry();
+            controller.setWszystko();
+            this.sumaPrzychodow.innerHTML = controller.getSumaPrzychodow();
+            this.sumaWydatkow.innerHTML = controller.getSumaWydatkow();
+            this.wartoscBilansu.innerHTML = controller.getBilans();
+        });
 
         // this.render();
     },
