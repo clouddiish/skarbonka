@@ -112,8 +112,8 @@ const controller = {
     // metoda do inicjalizacji kontrolera
     init() {
         // ustaw sumy w modelu
-        this.setSumaTransakcji("przychód");
-        this.setSumaTransakcji("wydatek");
+        this.setSumaTransakcji("Przychód");
+        this.setSumaTransakcji("Wydatek");
         this.setBilans();
 
         // zainicjuj view
@@ -196,9 +196,9 @@ const controller = {
             if (transakcja.typ == typp) suma = suma + transakcja.wartosc;
         }
 
-        if (typp === "przychód") {
+        if (typp === "Przychód") {
             model.sumaPrzychodow = suma;
-        } else if (typp === "wydatek") {
+        } else if (typp === "Wydatek") {
             model.sumaWydatkow = suma;
         }
     },
@@ -210,8 +210,8 @@ const controller = {
 
     // ustaw wszystkie potrzebne rzeczy po wyfiltrowaniu
     setWszystko() {
-        this.setSumaTransakcji("przychód", view.fkategoria.value);
-        this.setSumaTransakcji("wydatek", view.fkategoria.value);
+        this.setSumaTransakcji("Przychód", view.fkategoria.value);
+        this.setSumaTransakcji("Wydatek", view.fkategoria.value);
         this.setBilans();
     }
 }
