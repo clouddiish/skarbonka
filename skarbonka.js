@@ -10,31 +10,31 @@ const model = {
         {
             data: "2024-04-16",
             wartosc: 20,
-            typ: "wydatek",
-            kategoria: "jedzenie"
+            typ: "Wydatek",
+            kategoria: "Jedzenie"
         },
         {
             data: "2024-04-15",
             wartosc: 30,
-            typ: "wydatek",
-            kategoria: "jedzenie"
+            typ: "Wydatek",
+            kategoria: "Jedzenie"
         },
         {
             data: "2024-04-16",
             wartosc: 200,
-            typ: "wydatek",
-            kategoria: "lekarz"
+            typ: "Wydatek",
+            kategoria: "Lekarz"
         },
         {
             data: "2024-04-16",
             wartosc: 1000,
-            typ: "przychód",
+            typ: "Przychód",
             kategoria: "Pensja"
         },
         {
             data: "2024-04-16",
             wartosc: 100000,
-            typ: "przychód",
+            typ: "Przychód",
             kategoria: "Babcia"
         }
     ]
