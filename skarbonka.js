@@ -1,6 +1,6 @@
 const model = {
-    filtrTyp: "",           // zapamiętanie aktualnego filtru typu transakcji
-    filtrKategoria: "",     // zapamiętanie aktualnego filtru kategorii transakcji
+    filtrTyp: "",           // aktualny filtr typu transakcji
+    filtrKategoria: "",     // ktualny filtr kategorii transakcji
     sumaPrzychodow: 0,      // aktualna suma przychodów po przefilrowaniu
     sumaWydatkow: 0,        // aktualna suma wydatków po przefiltrowaniu
     bilans: 0,              // aktualny bilans po przefiltrowaniu
@@ -42,6 +42,32 @@ const model = {
 
 const view = {
 
+    // metoda do inicjacji view
+    init() {
+
+        // uzupełnij ciało tabeli
+
+        this.updateTabela();
+
+        // uzupełnij dane na podstawie wszystkich transakcji
+        this.updateWartosci();
+
+        // po naciśnieciu guzika "Dodaj" zapisanie wpisanych wartości do obiektu
+        this.dodajBTN.addEventListener("click", () => {
+            controller.addTransakcja();
+            this.updateTabela();
+        });
+
+        // po naciśnięciu guzika "Filtruj" aktualizacja HTMLa
+        this.filtrujBTN.addEventListener("click", () => {
+            controller.setFiltry();
+            controller.setWszystko();
+            this.updateWartosci();
+            this.updateTabela();
+        });
+    },
+
+    // metoda do zapisania wskaźników na elementy DOM
     setDOM() {
 
         // zapisanie wskaźników do formularzy i guzików dodawania transakcji
@@ -60,29 +86,22 @@ const view = {
         this.sumaPrzychodow = document.getElementById("sumaPrzychodow");
         this.sumaWydatkow = document.getElementById("sumaWydatkow");
         this.wartoscBilansu = document.getElementById("wartoscBilansu");
+
+        // zapisanie wskaźnika do ciała tabeli
+        this.cialoTabeli = document.getElementById("cialoTabeli");
     },
 
-    // metoda do inicjacji view
-    init() {
-
-        // uzupełnij dane na podstawie wszystkich transakcji
-        this.updateWartosci();
-
-        // po naciśnieciu guzika "Dodaj" zapisanie wpisanych wartości do obiektu
-        this.dodajBTN.addEventListener("click", () => controller.addTransakcja());
-
-        // po naciśnięciu guzika "Filtruj" aktualizacja HTMLa
-        this.filtrujBTN.addEventListener("click", () => {
-            controller.setFiltry();
-            controller.setWszystko();
-            this.updateWartosci();
-        });
-    },
-
+    // metoda do aktualizowania wartości podsumowujących
     updateWartosci() {
         this.sumaPrzychodow.innerHTML = controller.getSumaPrzychodow();
         this.sumaWydatkow.innerHTML = controller.getSumaWydatkow();
         this.wartoscBilansu.innerHTML = controller.getBilans();
+    },
+
+    // metoda do aktualizowania tabeli
+    updateTabela() {
+        this.cialoTabeli.innerHTML = "";
+        controller.getTransakcjeByFiltry(controller.getFiltrTyp(), controller.getFiltrKategoria()).forEach(element => cialoTabeli.innerHTML += `<tr><td>${element.data}</td><td>${element.wartosc}</td><td>${element.typ}</td><td>${element.kategoria}</td></tr>`);
     }
 
 }
