@@ -55,6 +55,8 @@ const view = {
         // po naciśnieciu guzika "Dodaj" zapisanie wpisanych wartości do obiektu
         this.dodajBTN.addEventListener("click", () => {
             controller.addTransakcja();
+            controller.setWszystko();
+            this.updateWartosci();
             this.updateTabela();
         });
 
@@ -141,7 +143,7 @@ const controller = {
         nowaTransakcja = {};
 
         nowaTransakcja.data = view.data.value;
-        nowaTransakcja.wartosc = view.wartosc.value;
+        nowaTransakcja.wartosc = Number(view.wartosc.value);
         nowaTransakcja.typ = view.dtyp.value;
         nowaTransakcja.kategoria = view.dkategoria.value;
 
