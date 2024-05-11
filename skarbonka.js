@@ -76,9 +76,8 @@ const view = {
         // po naciśnięciu "usuń" usuwanie transakcji
         
         this.tabelaTransakcji.addEventListener("click", (event) => {
-            if (event.target.className === "delete") {
+            if (event.target.className === "delete btn btn-light") {
                 const id = parseInt(event.target.parentElement.id);
-                alert(id);
                 controller.usunTransakcje(id);
                 this.updateWartosci();
                 this.updateTabela();
@@ -125,8 +124,15 @@ const view = {
         controller.getTransakcjeByFiltry(
             controller.getFiltrTyp(),
             controller.getFiltrKategoria()).forEach(element =>
-                cialoTabeli.innerHTML += `<tr><td>${element.data}</td><td>${element.wartosc}</td><td>${element.typ}</td><td>${element.kategoria}</td>
-                <td id=${element.id} ><button type="button" class="delete btn btn-light">Usuń</button></td></tr>`);
+                cialoTabeli.innerHTML += 
+                    `<tr>
+                        <td>${element.data}</td>
+                        <td>${element.wartosc}</td>
+                        <td>${element.typ}</td>
+                        <td>${element.kategoria}</td>
+                        <td id=${element.id}>
+                            <button type="button" class="delete btn btn-light">Usuń</button></td>
+                    </tr>`);
     }
 
 }
