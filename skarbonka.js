@@ -31,14 +31,14 @@ const model = {
         {
             id: 3,
             data: "2024-04-16",
-            wartosc: 1000,
+            wartosc: 2500,
             typ: "Przychód",
             kategoria: "Pensja"
         },
         {
             id: 4,
             data: "2024-04-16",
-            wartosc: 100000,
+            wartosc: 1000,
             typ: "Przychód",
             kategoria: "Babcia"
         }
