@@ -8,30 +8,35 @@ const model = {
     // dane transakcji
     transakcje: [
         {
+            id: 0,
             data: "2024-04-16",
             wartosc: 20,
             typ: "Wydatek",
             kategoria: "Jedzenie"
         },
         {
+            id: 1,
             data: "2024-04-15",
             wartosc: 30,
             typ: "Wydatek",
             kategoria: "Jedzenie"
         },
         {
+            id: 2,
             data: "2024-04-16",
             wartosc: 200,
             typ: "Wydatek",
             kategoria: "Lekarz"
         },
         {
+            id: 3,
             data: "2024-04-16",
             wartosc: 1000,
             typ: "Przychód",
             kategoria: "Pensja"
         },
         {
+            id: 4,
             data: "2024-04-16",
             wartosc: 100000,
             typ: "Przychód",
@@ -67,6 +72,19 @@ const view = {
             this.updateWartosci();
             this.updateTabela();
         });
+
+        // po naciśnięciu "usuń" usuwanie transakcji
+        
+        this.tabelaTransakcji.addEventListener("click", (event) => {
+            if (event.target.className === "delete") {
+                const id = parseInt(event.target.parentElement.id);
+                alert(id);
+                controller.usunTransakcje(id);
+                this.updateWartosci();
+                this.updateTabela();
+            }
+        });
+
     },
 
     // metoda do zapisania wskaźników na elementy DOM
@@ -89,7 +107,8 @@ const view = {
         this.sumaWydatkow = document.getElementById("sumaWydatkow");
         this.wartoscBilansu = document.getElementById("wartoscBilansu");
 
-        // zapisanie wskaźnika do ciała tabeli
+        // zapisanie wskaźników do tabeli
+        this.tabelaTransakcji = document.getElementById("tabelaTransakcji");
         this.cialoTabeli = document.getElementById("cialoTabeli");
     },
 
@@ -103,7 +122,11 @@ const view = {
     // metoda do aktualizowania tabeli
     updateTabela() {
         this.cialoTabeli.innerHTML = "";
-        controller.getTransakcjeByFiltry(controller.getFiltrTyp(), controller.getFiltrKategoria()).forEach(element => cialoTabeli.innerHTML += `<tr><td>${element.data}</td><td>${element.wartosc}</td><td>${element.typ}</td><td>${element.kategoria}</td></tr>`);
+        controller.getTransakcjeByFiltry(
+            controller.getFiltrTyp(),
+            controller.getFiltrKategoria()).forEach(element =>
+                cialoTabeli.innerHTML += `<tr><td>${element.data}</td><td>${element.wartosc}</td><td>${element.typ}</td><td>${element.kategoria}</td>
+                <td id=${element.id} ><button type="button" class="delete btn btn-light">Usuń</button></td></tr>`);
     }
 
 }
@@ -142,6 +165,7 @@ const controller = {
     addTransakcja() {
         nowaTransakcja = {};
 
+        nowaTransakcja.id = model.transakcje[model.transakcje.length - 1].id + 1;
         nowaTransakcja.data = view.data.value;
         nowaTransakcja.wartosc = Number(view.wartosc.value);
         nowaTransakcja.typ = view.dtyp.value;
@@ -213,6 +237,17 @@ const controller = {
         this.setSumaTransakcji("Przychód", view.fkategoria.value);
         this.setSumaTransakcji("Wydatek", view.fkategoria.value);
         this.setBilans();
+    },
+
+    znajdzIndeksTransakcji(idOdView) {
+        for (let i = 0; i < model.transakcje.length; i++) {
+            if(idOdView == model.transakcje[i].id) return i;
+            
+        }
+    },
+
+    usunTransakcje(idOdView){
+        model.transakcje.splice(this.znajdzIndeksTransakcji(idOdView), 1);
     }
 }
 
