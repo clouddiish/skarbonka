@@ -74,7 +74,6 @@ const view = {
         });
 
         // po naciśnięciu "usuń" usuwanie transakcji
-        
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className === "delete btn btn-light") {
                 const id = parseInt(event.target.parentElement.id);
@@ -84,6 +83,15 @@ const view = {
             }
         });
 
+        // po naciśnięciu guzika "edytuj" edytowanie
+        this.tabelaTransakcji.addEventListener("click", (event) => {
+            if (event.target.className === "edit btn btn-light") {
+                const id = parseInt(event.target.parentElement.id);
+                controller.edytujTransakcje(id);
+                this.updateWartosci();
+                this.updateTabela();
+            }
+        });
     },
 
     // metoda do zapisania wskaźników na elementy DOM
@@ -124,14 +132,18 @@ const view = {
         controller.getTransakcjeByFiltry(
             controller.getFiltrTyp(),
             controller.getFiltrKategoria()).forEach(element =>
-                cialoTabeli.innerHTML += 
-                    `<tr>
+                cialoTabeli.innerHTML +=
+                `<tr>
                         <td>${element.data}</td>
                         <td>${element.wartosc}</td>
                         <td>${element.typ}</td>
                         <td>${element.kategoria}</td>
                         <td id=${element.id}>
-                            <button type="button" class="delete btn btn-light">Usuń</button></td>
+                            <button type="button" class="delete btn btn-light">Usuń</button>
+                        </td>
+                        <td id=${element.id}>
+                            <button type="button" class="edit btn btn-light">Edytuj</button>
+                        </td>
                     </tr>`);
     }
 
@@ -247,13 +259,35 @@ const controller = {
 
     znajdzIndeksTransakcji(idOdView) {
         for (let i = 0; i < model.transakcje.length; i++) {
-            if(idOdView == model.transakcje[i].id) return i;
-            
+            if (idOdView == model.transakcje[i].id) return i;
+
         }
     },
 
-    usunTransakcje(idOdView){
+    usunTransakcje(idOdView) {
         model.transakcje.splice(this.znajdzIndeksTransakcji(idOdView), 1);
+        this.setWszystko();
+    },
+
+    edytujTransakcje(idOdView) {
+        let data = prompt("Podaj nową datę");
+        let wartosc = Number(prompt("Podaj nową wartość"));
+        let typ = prompt("Podaj nowy typ");
+        let kategoria = prompt("Podaj nową kategorię");
+
+        let id = this.znajdzIndeksTransakcji(idOdView);
+
+        for (let transakcja of model.transakcje) {
+            if (transakcja.id == id) {
+                transakcja.data = data;
+                transakcja.wartosc = wartosc;
+                transakcja.typ = typ;
+                transakcja.kategoria = kategoria;
+                break;
+            }
+        }
+        
+        this.setWszystko();
     }
 }
 
