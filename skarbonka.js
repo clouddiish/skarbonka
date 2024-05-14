@@ -139,11 +139,12 @@ const view = {
                         <td>${element.typ}</td>
                         <td>${element.kategoria}</td>
                         <td id=${element.id}>
-                            <button type="button" class="delete btn btn-light">Usuń</button>
-                        </td>
-                        <td id=${element.id}>
                             <button type="button" class="edit btn btn-light">Edytuj</button>
                         </td>
+                        <td id=${element.id}>
+                            <button type="button" class="delete btn btn-light">Usuń</button>
+                        </td>
+                        
                     </tr>`);
     }
 

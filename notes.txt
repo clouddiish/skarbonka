@@ -3,9 +3,6 @@ nie działa:
 
 to do:
 
-> edycja transackji
-
-
 > trochę więcej danych w modelu
 > filtrowanie po datach - wersja jako liczby? czy pobawić się z datami w JS?
 > zrobić tak, żeby wielkość liter we wprowadzanych stringach nie miała znaczenia
