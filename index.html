@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Skarbonka</title>
+</head>
+
+<body>
+    <h1 class="m-5">Transakcje</h1>
+
+    <div class="m-5 container">
+        <h3>Dodaj transakcję</h3>
+
+        <div class="row">
+
+            <div class="col">
+                <label>Data: </label><br>
+                <input type="date" id="data" placeholder="2024-04-01"><br>
+            </div>
+
+            <div class="col">
+                <label>Wartość: </label><br>
+                <input type="number" id="wartosc" step="0.01" placeholder="20"><br>
+            </div>
+
+            <div class="col">
+                <label>Typ: </label><br>
+                <input id="dtyp" placeholder="Wydatek/Przychód"><br>
+            </div>
+
+            <div class="col">
+                <label>Kategoria: </label><br>
+                <input id="dkat" placeholder="Jedzenie"><br>
+            </div>
+        </div>
+        <br>
+        <button id="dodajBTN">Dodaj</button>
+
+    </div>
+
+
+
+    <div class="container m-5">
+        <h2>Historia</h2>
+
+        <div class="my-4">
+            <h3>Filtruj</h3>
+
+            <div class="row">
+
+                <!-- <div class="col">
+                    <label>Data od: </label><br>
+                    <input id="fdataod"><br>
+                    <button id="fdodBTN">Filtruj</button>
+                </div> -->
+
+                <!-- <div class="col">
+                    <label>Data do: </label><br>
+                    <input id="fdatado"><br>
+                    <button id="fddoBTN">Filtruj</button>
+                </div> -->
+
+                <div class="col">
+                    <label>Typ: </label><br>
+                    <input id="ftyp" placeholder="Wydatek/Przychód"><br>
+                </div>
+
+                <div class="col">
+                    <label>Kategoria: </label><br>
+                    <input id="fkat" placeholder="Jedzenie"><br>
+                </div>
+
+            </div>
+            <br>
+            <button id="filtrujBTN">Filtruj</button>
+
+        </div>
+
+        <div class="my-5">
+            <h3 class="mb-4">Podsumowanie</h3>
+
+            <div class="row my-3">
+                <div class="col">
+                    <div class="border rounded pt-1">
+                        <p class="typ text-center">Przychody</p>
+                        <p class="text-center" id="sumaPrzychodow"></p>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="border rounded pt-1">
+                        <p class="typ text-center">Wydatki</p>
+                        <p class="text-center" id="sumaWydatkow"></p>
+                    </div>
+                </div>
+
+                <div class="col ">
+                    <div class="border rounded pt-1">
+                        <p class="typ text-center">Bilans</p>
+                        <p class="text-center" id="wartoscBilansu"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-5">
+            <h3>Lista transakcji</h3>
+            <table class="table my-3" id="tabelaTransakcji">
+                <thead>
+                    <tr>
+                        <!-- <th>ID</th> -->
+                        <th>Data</th>
+                        <th>Wartość</th>
+                        <th>Typ</th>
+                        <th>Kategoria</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                <tbody id="cialoTabeli"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!--Bootstrap scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!--MVC script-->
+    <script src="skarbonka.js"></script>
+
+</body>
+
+</html>
