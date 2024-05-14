@@ -275,10 +275,8 @@ const controller = {
         let typ = prompt("Podaj nowy typ");
         let kategoria = prompt("Podaj nową kategorię");
 
-        let id = this.znajdzIndeksTransakcji(idOdView);
-
         for (let transakcja of model.transakcje) {
-            if (transakcja.id == id) {
+            if (transakcja.id == idOdView) {
                 transakcja.data = data;
                 transakcja.wartosc = wartosc;
                 transakcja.typ = typ;
