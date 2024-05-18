@@ -42,6 +42,25 @@ const model = {
             typ: "Przychód",
             kategoria: "Babcia"
         }
+    ],
+
+    kategorie: [
+        {
+            nazwa: "Jedzenie",
+            dotyczyTypu: "Wydatek"
+        },
+        {
+            nazwa: "Lekarz",
+            dotyczyTypu: "Wydatek"
+        },
+        {
+            nazwa: "Pensja",
+            dotyczyTypu: "Przychód"
+        },
+        {
+            nazwa: "Babcia",
+            dotyczyTypu: "Przychód"
+        }
     ]
 }
 
@@ -51,8 +70,10 @@ const view = {
     init() {
 
         // uzupełnij ciało tabeli
-
         this.updateTabela();
+
+        // uzupełnij listę kategorii
+        this.updateKategorie();
 
         // uzupełnij dane na podstawie wszystkich transakcji
         this.updateWartosci();
@@ -104,7 +125,10 @@ const view = {
         this.wartoscKom = document.getElementById("wartoscKom");
 
         this.dtyp = document.getElementById("dtyp");
-        this.dkategoria = document.getElementById("dkat");
+
+        this.dkategoria = document.getElementById("dkategoria");
+        this.listaKategorii = document.getElementById("listaKategorii");
+
         this.dodajBTN = document.getElementById("dodajBTN");
 
         // zapisanie wskaźników do formularzy i guzików do filtrowania transakcji
@@ -151,9 +175,20 @@ const view = {
                     </tr>`);
     },
 
-    updateKomunikatWartosc(komunikat){
+    updateKategorie() {
+        this.listaKategorii.innerHTML = "";
+        controller.getKategorie().forEach(element =>
+            listaKategorii.innerHTML +=
+            `<option value=${element.nazwa}>`
+        );
+
+    },
+
+    updateKomunikatWartosc(komunikat) {
         this.wartoscKom.innerHTML = komunikat;
-    }
+    },
+
+
 
 }
 
@@ -202,9 +237,17 @@ const controller = {
             return;
         }
 
-
         nowaTransakcja.typ = view.dtyp.value;
+
         nowaTransakcja.kategoria = view.dkategoria.value;
+        if (!this.czyKategoriaIstnieje()) {
+            nowaKategoria = {};
+            
+            nowaKategoria.nazwa = view.dkategoria.value;
+
+            model.kategorie.push(nowaKategoria);
+            view.updateKategorie();
+        }
 
         model.transakcje.push(nowaTransakcja);
     },
@@ -303,6 +346,18 @@ const controller = {
         }
 
         this.setWszystko();
+    },
+
+    czyKategoriaIstnieje() {
+        for (let kategoria of model.kategorie) {
+            if (kategoria.nazwa == view.dkategoria.value) return true;
+        }
+
+        return false;
+    },
+
+    getKategorie() {
+        return model.kategorie;
     }
 }
 
