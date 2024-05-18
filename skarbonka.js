@@ -73,7 +73,8 @@ const view = {
         this.updateTabela();
 
         // uzupełnij listę kategorii
-        this.updateKategorie();
+        this.updateDodajKategorie();
+        this.updateFiltrujKategorie();
 
         // uzupełnij dane na podstawie wszystkich transakcji
         this.updateWartosci();
@@ -133,7 +134,7 @@ const view = {
 
         // zapisanie wskaźników do formularzy i guzików do filtrowania transakcji
         this.ftyp = document.getElementById("ftyp");
-        this.fkategoria = document.getElementById("fkat");
+        this.fkategorie = document.getElementById("fkategorie");
         this.filtrujBTN = document.getElementById("filtrujBTN");
 
         // zapisanie wskaźników do wartości podsumowujących
@@ -175,13 +176,19 @@ const view = {
                     </tr>`);
     },
 
-    updateKategorie() {
+    updateDodajKategorie() {
         this.listaKategorii.innerHTML = "";
         controller.getKategorie().forEach(element =>
-            listaKategorii.innerHTML +=
-            `<option value=${element.nazwa}>`
+            listaKategorii.innerHTML += `<option value=${element.nazwa}>`
         );
 
+    },
+
+    updateFiltrujKategorie(){
+        this.fkategorie.innerHTML = '<option value="">Wszystko</option>';
+        controller.getKategorie().forEach(element =>
+            fkategorie.innerHTML += `<option value=${element.nazwa}>${element.nazwa}</option>`
+        )
     },
 
     updateKomunikatWartosc(komunikat) {
@@ -219,7 +226,7 @@ const controller = {
     // ustaw nowe filtry wybrane przez użytkownika w modelu
     setFiltry() {
         model.filtrTyp = view.ftyp.value;
-        model.filtrKategoria = view.fkategoria.value;
+        model.filtrKategoria = view.fkategorie.value;
     },
 
     // dodaj nową transakcję wpisaną przez użytkownika do modelu 
@@ -246,7 +253,9 @@ const controller = {
             nowaKategoria.nazwa = view.dkategoria.value;
 
             model.kategorie.push(nowaKategoria);
-            view.updateKategorie();
+
+            view.updateDodajKategorie();
+            view.updateFiltrujKategorie();
         }
 
         model.transakcje.push(nowaTransakcja);
@@ -312,8 +321,8 @@ const controller = {
 
     // ustaw wszystkie potrzebne rzeczy po wyfiltrowaniu
     setWszystko() {
-        this.setSumaTransakcji("Przychód", view.fkategoria.value);
-        this.setSumaTransakcji("Wydatek", view.fkategoria.value);
+        this.setSumaTransakcji("Przychód", view.fkategorie.value);
+        this.setSumaTransakcji("Wydatek", view.fkategorie.value);
         this.setBilans();
     },
 

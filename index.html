@@ -47,11 +47,6 @@
                 <input list="listaKategorii" name="browser" id="dkategoria">
 
                 <datalist id="listaKategorii">
-                    <!-- <option value="Edge">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari"> -->
                 </datalist>
 
             </div>
@@ -85,12 +80,17 @@
 
                 <div class="col">
                     <label>Typ: </label><br>
-                    <input id="ftyp" placeholder="Wydatek/Przychód"><br>
+                    <select id="ftyp">
+                        <option value="">Wszystko</option>
+                        <option value="Wydatek">Wydatek</option>
+                        <option value="Przychód">Przychód</option>
+                    </select><br>
                 </div>
 
                 <div class="col">
                     <label>Kategoria: </label><br>
-                    <input id="fkat" placeholder="Jedzenie"><br>
+                    <select id="fkategorie">
+                    </select><br>
                 </div>
 
             </div>
