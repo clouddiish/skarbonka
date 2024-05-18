@@ -31,11 +31,15 @@
             <div class="col">
                 <label>Wartość: </label><br>
                 <input type="number" id="wartosc" step="0.01" placeholder="20"><br>
+                <p id="wartoscKom" class="komunikat"></p>
             </div>
 
             <div class="col">
                 <label>Typ: </label><br>
-                <input id="dtyp" placeholder="Wydatek/Przychód"><br>
+                <select id="dtyp">
+                    <option value="Wydatek">Wydatek</option>
+                    <option value="Przychód">Przychód</option>
+                </select><br>
             </div>
 
             <div class="col">

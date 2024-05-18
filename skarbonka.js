@@ -99,7 +99,10 @@ const view = {
 
         // zapisanie wskaźników do formularzy i guzików dodawania transakcji
         this.data = document.getElementById("data");
+
         this.wartosc = document.getElementById("wartosc");
+        this.wartoscKom = document.getElementById("wartoscKom");
+
         this.dtyp = document.getElementById("dtyp");
         this.dkategoria = document.getElementById("dkat");
         this.dodajBTN = document.getElementById("dodajBTN");
@@ -146,6 +149,10 @@ const view = {
                         </td>
                         
                     </tr>`);
+    },
+
+    updateKomunikatWartosc(komunikat){
+        this.wartoscKom.innerHTML = komunikat;
     }
 
 }
@@ -186,7 +193,16 @@ const controller = {
 
         nowaTransakcja.id = model.transakcje[model.transakcje.length - 1].id + 1;
         nowaTransakcja.data = view.data.value;
-        nowaTransakcja.wartosc = Number(view.wartosc.value);
+
+        if (view.wartosc.value !== "") {
+            nowaTransakcja.wartosc = Number(view.wartosc.value);
+            view.updateKomunikatWartosc("");
+        } else {
+            view.updateKomunikatWartosc("Proszę podać liczbę");
+            return;
+        }
+
+
         nowaTransakcja.typ = view.dtyp.value;
         nowaTransakcja.kategoria = view.dkategoria.value;
 
@@ -285,7 +301,7 @@ const controller = {
                 break;
             }
         }
-        
+
         this.setWszystko();
     }
 }
