@@ -110,13 +110,19 @@ const view = {
             if (event.target.className === "edit btn btn-light") {
                 const id = parseInt(event.target.parentElement.id);
                 this.wyswietlFormularzEdycji(id);
-
-
-                // controller.edytujTransakcje(id);
+                this.setDOMedycja();
 
                 // ?? czy to tu? -> dopiero po naciśnięciu zapisz
                 // this.updateWartosci(); 
                 // this.updateTabela();
+            }
+        });
+
+        // po naciśnięciu guzyka "zapisz" nowe dane transakcji są zapisywane do modelu
+        this.ezapiszBTN.addEventListener("click", (event) => {
+            if (event.target.className === "save btn btn-light") {
+                const id = parseInt(event.target.parentElement.id);
+                controller.setEdytujTransakcje(id);
             }
         });
     },
@@ -150,6 +156,15 @@ const view = {
         // zapisanie wskaźników do tabeli
         this.tabelaTransakcji = document.getElementById("tabelaTransakcji");
         this.cialoTabeli = document.getElementById("cialoTabeli");
+    },
+
+    // zapisanie wskaźników do elementów edycji transakcji
+    setDOMedycja(){
+        this.edata = document.getElementById("edata");
+        this.ewartosc = document.getElementById("ewartosc");
+        this.etyp = document.getElementById("etyp");
+        this.ekategoria = document.getElementById("ekategoria");
+        this.ezapiszBTN = document.getElementById("ezapiszBTN");
     },
 
     // metoda do aktualizowania wartości podsumowujących
@@ -218,17 +233,14 @@ const view = {
             </td>
             <td>
                 <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
-                <datalist id="elistaKategorii">
+                <datalist id="e listaKategorii">
+            </td>
+            <td id=${idOdView}>
+                <button id="ezapiszBTN" class="save btn btn-light">Zapisz</button>
             </td>
             <td>
-                <button id="ezapiszBTN" class="btn btn-light">Zapisz</button>
-            </td>
-            <td>
-                <button id="eanulujBTN" class="btn btn-light">Anuluj</button>
             </td>`;
-
     }
-
 }
 
 const controller = {
@@ -362,11 +374,6 @@ const controller = {
 
     // ustaw wszystkie potrzebne rzeczy po wyfiltrowaniu
     setWszystko() {
-
-        if (model.filtrTyp == "") {
-
-        }
-
         this.setSumaTransakcji();
         this.setBilans();
     },
@@ -383,18 +390,14 @@ const controller = {
         this.setWszystko();
     },
 
-    edytujTransakcje(idOdView) {
-        // let data = prompt("Podaj nową datę");
-        // let wartosc = Number(prompt("Podaj nową wartość"));
-        // let typ = prompt("Podaj nowy typ");
-        // let kategoria = prompt("Podaj nową kategorię");
+    setEdytujTransakcje(idOdView) {
 
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
-                transakcja.data = data;
-                transakcja.wartosc = wartosc;
-                transakcja.typ = typ;
-                transakcja.kategoria = kategoria;
+                transakcja.data = view.edata.value;
+                transakcja.wartosc = view.ewartosc.value;
+                transakcja.typ = view.etyp.value;
+                transakcja.kategoria = view.ekategoria.value;
                 break;
             }
         }
