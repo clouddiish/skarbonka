@@ -184,7 +184,7 @@ const view = {
 
     },
 
-    updateFiltrujKategorie(){
+    updateFiltrujKategorie() {
         this.fkategorie.innerHTML = '<option value="">Wszystko</option>';
         controller.getKategorie().forEach(element =>
             fkategorie.innerHTML += `<option value=${element.nazwa}>${element.nazwa}</option>`
@@ -249,7 +249,7 @@ const controller = {
         nowaTransakcja.kategoria = view.dkategoria.value;
         if (!this.czyKategoriaIstnieje()) {
             nowaKategoria = {};
-            
+
             nowaKategoria.nazwa = view.dkategoria.value;
 
             model.kategorie.push(nowaKategoria);
@@ -300,29 +300,44 @@ const controller = {
     },
 
     // ustaw nową sumę transakcji o podanym typie i kategorii
-    setSumaTransakcji(typp, katt = "") {
+    findSumaTransakcji(typp, katt = "") {
         let suma = 0;
 
         for (let transakcja of this.getTransakcjeByFiltry(typp, katt)) {
             if (transakcja.typ == typp) suma = suma + transakcja.wartosc;
         }
 
-        if (typp === "Przychód") {
-            model.sumaPrzychodow = suma;
-        } else if (typp === "Wydatek") {
-            model.sumaWydatkow = suma;
+        return suma;
+    },
+
+    setSumaTransakcji() {
+        if (model.filtrTyp == "Przychód") {
+            model.sumaPrzychodow = this.findSumaTransakcji("Przychód", model.filtrKategoria);
+            model.sumaWydatkow = 0;
+        } else if (model.filtrTyp == "Wydatek") {
+            model.sumaWydatkow = this.findSumaTransakcji("Wydatek", model.filtrKategoria);
+            model.sumaPrzychodow = 0;
+        } else if (model.filtrTyp == "") {
+            model.sumaPrzychodow = this.findSumaTransakcji("Przychód", model.filtrKategoria);
+            model.sumaWydatkow = this.findSumaTransakcji("Wydatek", model.filtrKategoria);
         }
+
+
     },
 
     // ustaw aktualny bilans
     setBilans() {
-        return model.bilans = this.getSumaPrzychodow() - this.getSumaWydatkow();
+        model.bilans = this.getSumaPrzychodow() - this.getSumaWydatkow();
     },
 
     // ustaw wszystkie potrzebne rzeczy po wyfiltrowaniu
     setWszystko() {
-        this.setSumaTransakcji("Przychód", view.fkategorie.value);
-        this.setSumaTransakcji("Wydatek", view.fkategorie.value);
+
+        if (model.filtrTyp == "") {
+
+        }
+
+        this.setSumaTransakcji();
         this.setBilans();
     },
 
