@@ -157,10 +157,9 @@ const view = {
         this.ewartosc = document.getElementById("ewartosc");
         this.etyp = document.getElementById("etyp");
         this.ekategoria = document.getElementById("ekategoria");
-        this.ezapiszBTN = document.getElementById("ezapiszBTN");
 
         // po naciśnięciu guzyka "zapisz" nowe dane transakcji są zapisywane do modelu
-        this.ezapiszBTN.addEventListener("click", (event) => {
+        this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className == "save btn btn-light") {
                 let id = parseInt(event.target.parentElement.id);
                 controller.setEdytujTransakcje(id);
@@ -237,7 +236,7 @@ const view = {
                 <datalist id="elistaKategorii">
             </td>
             <td id=${idOdView}>
-                <button id="ezapiszBTN" class="save btn btn-light">Zapisz</button>
+                <button class="save btn btn-light">Zapisz</button>
             </td>
             <td>
             </td>`;
