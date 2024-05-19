@@ -110,11 +110,7 @@ const view = {
             if (event.target.className === "edit btn btn-light") {
                 let id = parseInt(event.target.parentElement.id);
                 this.wyswietlFormularzEdycji(id);
-                this.setDOMedycja();
-
-                // ?? czy to tu? -> dopiero po naciśnięciu zapisz
-                // this.updateWartosci(); 
-                // this.updateTabela();
+                this.setDOMedycja(id);
             }
         });
 
@@ -122,6 +118,8 @@ const view = {
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className == "save btn btn-light") {
                 let id = parseInt(event.target.parentElement.id);
+
+                this.setDOMedycja(id);
                 controller.setEdytujTransakcje(id);
             }
         });
@@ -161,11 +159,12 @@ const view = {
 
     // zapisanie wskaźników do elementów edycji transakcji
     // WSKAŹNIKI NIE MOGĄ BYĆ PO ID TYLKO JAKOŚ INACZEJ BO MOŻNA WIĘCEJ NA RAZ EDYTOWAĆ I TO POWINNO BYĆ DYNAMICZNIE
-    setDOMedycja() {
-        this.edata = document.getElementById("edata");
-        this.ewartosc = document.getElementById("ewartosc");
-        this.etyp = document.getElementById("etyp");
-        this.ekategoria = document.getElementById("ekategoria");
+    setDOMedycja(idOdView) {
+
+        this.edata = document.getElementById(`edata${idOdView}`);
+        this.ewartosc = document.getElementById(`ewartosc${idOdView}`);
+        this.etyp = document.getElementById(`etyp${idOdView}`);
+        this.ekategoria = document.getElementById(`ekategoria${idOdView}`);
     },
 
     // metoda do aktualizowania wartości podsumowujących
@@ -221,26 +220,44 @@ const view = {
 
         edytowanyWiersz.innerHTML = `
             <td>
-                <input type="date" id="edata" placeholder="2024-04-01">
+                <input type="date" id="edata${idOdView}" placeholder="2024-04-01">
             </td>
             <td>
-                <input type="number" id="ewartosc" step="0.01" placeholder="20">
+                <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20">
             </td>
             <td>
-                <select id="etyp">
+                <select id="etyp${idOdView}">
                     <option value="Wydatek">Wydatek</option>
                     <option value="Przychód">Przychód</option>
                 </select>
             </td>
             <td>
-                <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
-                <datalist id="elistaKategorii">
+                <input list="elistaKategorii${idOdView}" name="browser" id="ekategoria${idOdView}" class="listaKategorii">
+                <datalist id="elistaKategorii${idOdView}">
             </td>
             <td id=${idOdView}>
                 <button class="save btn btn-light">Zapisz</button>
             </td>
             <td>
             </td>`;
+    },
+
+    ukryjFormularzEdycji(idOdView) {
+        let edytowanyWiersz = document.getElementById(idOdView).parentElement;
+
+        edytowanyWiersz.innerHTML =
+            `<tr>
+                <td>${controller.getDataPoId(idOdView)}</td>
+                <td>${controller.getWartoscPoId(idOdView)}</td>
+                <td>${controller.getTypPoId(idOdView)}</td>
+                <td>${controller.getKategoriaPoId(idOdView)}</td>
+                <td id=${idOdView}>
+                    <button type="button" class="edit btn btn-light">Edytuj</button>
+                </td>
+                <td id=${idOdView}>
+                    <button type="button" class="delete btn btn-light">Usuń</button>
+                </td>
+            </tr>`
     }
 }
 
@@ -396,7 +413,7 @@ const controller = {
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
                 transakcja.data = view.edata.value;
-                transakcja.wartosc = view.ewartosc.value;
+                transakcja.wartosc = Number(view.ewartosc.value);
                 transakcja.typ = view.etyp.value;
                 transakcja.kategoria = view.ekategoria.value;
                 break;
@@ -404,6 +421,9 @@ const controller = {
         }
 
         this.setWszystko();
+
+        view.updateWartosci();
+        view.ukryjFormularzEdycji(idOdView);
     },
 
     czyKategoriaIstnieje() {
@@ -416,7 +436,38 @@ const controller = {
 
     getKategorie() {
         return model.kategorie;
-    }
+    },
+
+    getDataPoId(idOdView) {
+        for (let transakcja of model.transakcje) {
+            if (transakcja.id == idOdView) {
+                return transakcja.data;
+            }
+        }
+    },
+
+    getWartoscPoId(idOdView) {
+        for (let transakcja of model.transakcje) {
+            if (transakcja.id == idOdView) {
+                return transakcja.wartosc;
+            }
+        }
+    },
+    getTypPoId(idOdView) {
+        for (let transakcja of model.transakcje) {
+            if (transakcja.id == idOdView) {
+                return transakcja.typ;
+            }
+        }
+    },
+
+    getKategoriaPoId(idOdView) {
+        for (let transakcja of model.transakcje) {
+            if (transakcja.id == idOdView) {
+                return transakcja.kategoria;
+            }
+        }
+    },
 }
 
 // inicjacja kontrolera
