@@ -44,7 +44,7 @@
 
             <div class="col">
                 <label>Kategoria: </label><br>
-                <input list="listaKategorii" name="browser" id="dkategoria">
+                <input list="listaKategorii" name="browser" id="dkategoria" class="listaKategorii">
 
                 <datalist id="listaKategorii">
                 </datalist>
@@ -140,7 +140,33 @@
                         <th>Usuń</th>
                     </tr>
                 </thead>
-                <tbody id="cialoTabeli"></tbody>
+                <tbody id="cialoTabeli">
+                    <!-- HTML do edycji transakcji -->
+                    <!-- <tr>
+                        <td>
+                            <input type="date" id="edata" placeholder="2024-04-01">
+                        </td>
+                        <td>
+                            <input type="number" id="ewartosc" step="0.01" placeholder="20">
+                        </td>
+                        <td>
+                            <select id="etyp">
+                                <option value="Wydatek">Wydatek</option>
+                                <option value="Przychód">Przychód</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
+                            <datalist id="elistaKategorii">
+                        </td>
+                        <td>
+                            <button id="ezapiszBTN" class="btn btn-light">Zapisz</button>
+                        </td>
+                        <td>
+                            <button id="eanulujBTN" class="btn btn-light">Anuluj</button>
+                        </td>
+                    </tr> -->
+                </tbody>
             </table>
         </div>
 

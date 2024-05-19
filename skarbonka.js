@@ -109,9 +109,14 @@ const view = {
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className === "edit btn btn-light") {
                 const id = parseInt(event.target.parentElement.id);
-                controller.edytujTransakcje(id);
-                this.updateWartosci();
-                this.updateTabela();
+                this.wyswietlFormularzEdycji(id);
+
+
+                // controller.edytujTransakcje(id);
+
+                // ?? czy to tu? -> dopiero po naciśnięciu zapisz
+                // this.updateWartosci(); 
+                // this.updateTabela();
             }
         });
     },
@@ -195,7 +200,34 @@ const view = {
         this.wartoscKom.innerHTML = komunikat;
     },
 
+    wyswietlFormularzEdycji(idOdView) {
+        let edytowanyWiersz = document.getElementById(idOdView).parentElement;
 
+        edytowanyWiersz.innerHTML = `
+            <td>
+                <input type="date" id="edata" placeholder="2024-04-01">
+            </td>
+            <td>
+                <input type="number" id="ewartosc" step="0.01" placeholder="20">
+            </td>
+            <td>
+                <select id="etyp">
+                    <option value="Wydatek">Wydatek</option>
+                    <option value="Przychód">Przychód</option>
+                </select>
+            </td>
+            <td>
+                <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
+                <datalist id="elistaKategorii">
+            </td>
+            <td>
+                <button id="ezapiszBTN" class="btn btn-light">Zapisz</button>
+            </td>
+            <td>
+                <button id="eanulujBTN" class="btn btn-light">Anuluj</button>
+            </td>`;
+
+    }
 
 }
 
@@ -321,8 +353,6 @@ const controller = {
             model.sumaPrzychodow = this.findSumaTransakcji("Przychód", model.filtrKategoria);
             model.sumaWydatkow = this.findSumaTransakcji("Wydatek", model.filtrKategoria);
         }
-
-
     },
 
     // ustaw aktualny bilans
@@ -354,10 +384,10 @@ const controller = {
     },
 
     edytujTransakcje(idOdView) {
-        let data = prompt("Podaj nową datę");
-        let wartosc = Number(prompt("Podaj nową wartość"));
-        let typ = prompt("Podaj nowy typ");
-        let kategoria = prompt("Podaj nową kategorię");
+        // let data = prompt("Podaj nową datę");
+        // let wartosc = Number(prompt("Podaj nową wartość"));
+        // let typ = prompt("Podaj nowy typ");
+        // let kategoria = prompt("Podaj nową kategorię");
 
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
