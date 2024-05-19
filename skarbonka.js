@@ -108,7 +108,7 @@ const view = {
         // po naciśnięciu guzika "edytuj" edytowanie
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className === "edit btn btn-light") {
-                const id = parseInt(event.target.parentElement.id);
+                let id = parseInt(event.target.parentElement.id);
                 this.wyswietlFormularzEdycji(id);
                 this.setDOMedycja();
 
@@ -120,8 +120,8 @@ const view = {
 
         // po naciśnięciu guzyka "zapisz" nowe dane transakcji są zapisywane do modelu
         this.ezapiszBTN.addEventListener("click", (event) => {
-            if (event.target.className === "save btn btn-light") {
-                const id = parseInt(event.target.parentElement.id);
+            if (event.target.className == "save btn btn-light") {
+                let id = parseInt(event.target.parentElement.id);
                 controller.setEdytujTransakcje(id);
             }
         });
@@ -193,7 +193,7 @@ const view = {
                             <button type="button" class="delete btn btn-light">Usuń</button>
                         </td>
                         
-                    </tr>`);
+                </tr>`);
     },
 
     updateDodajKategorie() {
@@ -233,7 +233,7 @@ const view = {
             </td>
             <td>
                 <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
-                <datalist id="e listaKategorii">
+                <datalist id="elistaKategorii">
             </td>
             <td id=${idOdView}>
                 <button id="ezapiszBTN" class="save btn btn-light">Zapisz</button>
