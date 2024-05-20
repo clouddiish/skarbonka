@@ -163,6 +163,7 @@ const view = {
 
         this.edata = document.getElementById(`edata${idOdView}`);
         this.ewartosc = document.getElementById(`ewartosc${idOdView}`);
+        this.ewartoscKom = document.getElementById(`ewartoscKom${idOdView}`)
         this.etyp = document.getElementById(`etyp${idOdView}`);
         this.ekategoria = document.getElementById(`ekategoria${idOdView}`);
     },
@@ -224,6 +225,7 @@ const view = {
             </td>
             <td>
                 <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20">
+                <p id="ewartoscKom${idOdView}" class="komunikat"></p>
             </td>
             <td>
                 <select id="etyp${idOdView}">
@@ -258,6 +260,10 @@ const view = {
                     <button type="button" class="delete btn btn-light">Usuń</button>
                 </td>
             </tr>`
+    },
+
+    updateKomunikatWartoscE(komunikat){
+        this.ewartoscKom.innerHTML = komunikat;
     }
 }
 
@@ -410,14 +416,20 @@ const controller = {
 
     setEdytujTransakcje(idOdView) {
 
-        for (let transakcja of model.transakcje) {
-            if (transakcja.id == idOdView) {
-                transakcja.data = view.edata.value;
-                transakcja.wartosc = Number(view.ewartosc.value);
-                transakcja.typ = view.etyp.value;
-                transakcja.kategoria = view.ekategoria.value;
-                break;
+        if (view.ewartosc.value !== "") {
+            for (let transakcja of model.transakcje) {
+                if (transakcja.id == idOdView) {
+                    transakcja.data = view.edata.value;
+                    transakcja.wartosc = Number(view.ewartosc.value);
+                    transakcja.typ = view.etyp.value;
+                    transakcja.kategoria = view.ekategoria.value;
+                    break;
+                }
             }
+            view.updateKomunikatWartoscE("");
+        } else {
+            view.updateKomunikatWartoscE("Proszę podać liczbę");
+            return;
         }
 
         this.setWszystko();
