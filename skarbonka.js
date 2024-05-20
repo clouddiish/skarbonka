@@ -236,6 +236,7 @@ const view = {
             <td>
                 <input list="elistaKategorii${idOdView}" name="browser" id="ekategoria${idOdView}" class="listaKategorii">
                 <datalist id="elistaKategorii${idOdView}">
+                </datalist>
             </td>
             <td id=${idOdView}>
                 <button class="save btn btn-light">Zapisz</button>
