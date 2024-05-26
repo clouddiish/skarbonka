@@ -231,20 +231,20 @@ const view = {
 
         edytowanyWiersz.innerHTML = `
             <td>
-                <input type="date" id="edata${idOdView}" placeholder="2024-04-01">
+                <input type="date" id="edata${idOdView}" placeholder="2024-04-01" class="form-control">
             </td>
             <td>
-                <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20">
+                <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20" class="form-control">
                 <p id="ewartoscKom${idOdView}" class="komunikat"></p>
             </td>
             <td>
-                <select id="etyp${idOdView}">
+                <select id="etyp${idOdView}" class="form-control">
                     <option value="Wydatek">Wydatek</option>
                     <option value="Przychód">Przychód</option>
                 </select>
             </td>
             <td>
-                <input list="elistaKategorii${idOdView}" id="ekategoria${idOdView}" class="listaKategorii">
+                <input list="elistaKategorii${idOdView}" id="ekategoria${idOdView}" class="listaKategorii form-control">
                 <datalist id="elistaKategorii${idOdView}">
                 </datalist>
             </td>
