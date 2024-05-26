@@ -5,7 +5,7 @@ const model = {
     sumaWydatkow: 0,        // aktualna suma wydatków po przefiltrowaniu
     bilans: 0,              // aktualny bilans po przefiltrowaniu
 
-    // dane transakcji
+    // lista transakcji
     transakcje: [
         {
             id: 0,
@@ -44,6 +44,7 @@ const model = {
         }
     ],
 
+    // lista kategorii
     kategorie: [
         {
             nazwa: "Jedzenie",
@@ -158,7 +159,6 @@ const view = {
     },
 
     // zapisanie wskaźników do elementów edycji transakcji
-    // WSKAŹNIKI NIE MOGĄ BYĆ PO ID TYLKO JAKOŚ INACZEJ BO MOŻNA WIĘCEJ NA RAZ EDYTOWAĆ I TO POWINNO BYĆ DYNAMICZNIE
     setDOMedycja(idOdView) {
 
         this.edata = document.getElementById(`edata${idOdView}`);
@@ -197,6 +197,7 @@ const view = {
                 </tr>`);
     },
 
+    // zaktualizuj listę rozwijaną kategorii przy dodawaniu transakcji
     updateDodajKategorie() {
         this.listaKategorii.innerHTML = "";
         controller.getKategorie().forEach(element =>
@@ -205,6 +206,7 @@ const view = {
 
     },
 
+    // zaktualizuj listę rozwijaną kategorii przy filtrowaniu transakcji
     updateFiltrujKategorie() {
         this.fkategorie.innerHTML = '<option value="">Wszystko</option>';
         controller.getKategorie().forEach(element =>
@@ -212,10 +214,12 @@ const view = {
         )
     },
 
+    // zaktualizuj treść komunikatu pod wartością przy dodawaniu transakcji
     updateKomunikatWartosc(komunikat) {
         this.wartoscKom.innerHTML = komunikat;
     },
 
+    // wyświetl formularz edycji przy transakcji o zadanym HTML-owym ID od view 
     wyswietlFormularzEdycji(idOdView) {
         let edytowanyWiersz = document.getElementById(idOdView).parentElement;
 
@@ -245,6 +249,7 @@ const view = {
             </td>`;
     },
 
+    // ukryj formularz edycji przy zadanym HTML-owym ID od view
     ukryjFormularzEdycji(idOdView) {
         let edytowanyWiersz = document.getElementById(idOdView).parentElement;
 
@@ -263,6 +268,7 @@ const view = {
             </tr>`
     },
 
+    // zaktualizuj treść komunikatu pod wartością przy edycji transakcji
     updateKomunikatWartoscE(komunikat){
         this.ewartoscKom.innerHTML = komunikat;
     }
@@ -368,8 +374,8 @@ const controller = {
         return model.bilans;
     },
 
-    // ustaw nową sumę transakcji o podanym typie i kategorii
-    findSumaTransakcji(typp, katt = "") {
+    // oblicz nową sumę transakcji o podanym typie i kategorii
+    obliczSumeTransakcji(typp, katt = "") {
         let suma = 0;
 
         for (let transakcja of this.getTransakcjeByFiltry(typp, katt)) {
@@ -379,16 +385,17 @@ const controller = {
         return suma;
     },
 
+    // ustaw wartości podsumowujące w modelu
     setSumaTransakcji() {
         if (model.filtrTyp == "Przychód") {
-            model.sumaPrzychodow = this.findSumaTransakcji("Przychód", model.filtrKategoria);
+            model.sumaPrzychodow = this.obliczSumeTransakcji("Przychód", model.filtrKategoria);
             model.sumaWydatkow = 0;
         } else if (model.filtrTyp == "Wydatek") {
-            model.sumaWydatkow = this.findSumaTransakcji("Wydatek", model.filtrKategoria);
+            model.sumaWydatkow = this.obliczSumeTransakcji("Wydatek", model.filtrKategoria);
             model.sumaPrzychodow = 0;
         } else if (model.filtrTyp == "") {
-            model.sumaPrzychodow = this.findSumaTransakcji("Przychód", model.filtrKategoria);
-            model.sumaWydatkow = this.findSumaTransakcji("Wydatek", model.filtrKategoria);
+            model.sumaPrzychodow = this.obliczSumeTransakcji("Przychód", model.filtrKategoria);
+            model.sumaWydatkow = this.obliczSumeTransakcji("Wydatek", model.filtrKategoria);
         }
     },
 
@@ -403,6 +410,7 @@ const controller = {
         this.setBilans();
     },
 
+    // znajdź indeks z modelu znając HTML-owe ID od view
     znajdzIndeksTransakcji(idOdView) {
         for (let i = 0; i < model.transakcje.length; i++) {
             if (idOdView == model.transakcje[i].id) return i;
@@ -410,11 +418,13 @@ const controller = {
         }
     },
 
+    // usuń transakcję o HTML-owym ID od view
     usunTransakcje(idOdView) {
         model.transakcje.splice(this.znajdzIndeksTransakcji(idOdView), 1);
         this.setWszystko();
     },
 
+    // edytuje transakcję o HTML-owym ID od view
     setEdytujTransakcje(idOdView) {
 
         if (view.ewartosc.value !== "") {
@@ -439,6 +449,7 @@ const controller = {
         view.ukryjFormularzEdycji(idOdView);
     },
 
+    // sprawdź, czy kategoria wpisana przy dodawaniu transakcji już istnieje w modelu
     czyKategoriaIstnieje() {
         for (let kategoria of model.kategorie) {
             if (kategoria.nazwa == view.dkategoria.value) return true;
@@ -447,10 +458,12 @@ const controller = {
         return false;
     },
 
+    // pobierz wszystkie kategorie z modelu
     getKategorie() {
         return model.kategorie;
     },
 
+    // pobierz datę transakcji o zadanym HTML-owym ID od view
     getDataPoId(idOdView) {
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
@@ -459,6 +472,7 @@ const controller = {
         }
     },
 
+    // pobierz wartość transakcji o zadanym HTML-owym ID od view
     getWartoscPoId(idOdView) {
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
@@ -466,6 +480,8 @@ const controller = {
             }
         }
     },
+
+    // pobierz typ transakcji o zadanym HTML-owym ID od view
     getTypPoId(idOdView) {
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
@@ -474,6 +490,7 @@ const controller = {
         }
     },
 
+    // pobierz kategorię transakcji o zadanym HTML-owym ID od view
     getKategoriaPoId(idOdView) {
         for (let transakcja of model.transakcje) {
             if (transakcja.id == idOdView) {
