@@ -86,6 +86,8 @@ const view = {
             controller.setWszystko();
             this.updateWartosci();
             this.updateTabela();
+            this.updateDodajKategorie();
+            this.updateFiltrujKategorie();
         });
 
         // po naciśnięciu guzika "Filtruj" aktualizacja HTMLa
@@ -96,7 +98,7 @@ const view = {
             this.updateTabela();
         });
 
-        // po naciśnięciu "usuń" usuwanie transakcji
+        // po naciśnięciu "Usuń" usuwanie transakcji
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className === "delete btn btn-light") {
                 const id = parseInt(event.target.parentElement.id);
@@ -106,16 +108,17 @@ const view = {
             }
         });
 
-        // po naciśnięciu guzika "edytuj" edytowanie
+        // po naciśnięciu guzika "Edytuj" edytowanie
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className === "edit btn btn-light") {
                 let id = parseInt(event.target.parentElement.id);
                 this.wyswietlFormularzEdycji(id);
                 this.setDOMedycja(id);
+                this.updateEdytujKategorie();
             }
         });
 
-        // po naciśnięciu guzyka "zapisz" nowe dane transakcji są zapisywane do modelu
+        // po naciśnięciu guzyka "Zapisz" nowe dane transakcji są zapisywane do modelu
         this.tabelaTransakcji.addEventListener("click", (event) => {
             if (event.target.className == "save btn btn-light") {
                 let id = parseInt(event.target.parentElement.id);
@@ -166,6 +169,7 @@ const view = {
         this.ewartoscKom = document.getElementById(`ewartoscKom${idOdView}`)
         this.etyp = document.getElementById(`etyp${idOdView}`);
         this.ekategoria = document.getElementById(`ekategoria${idOdView}`);
+        this.elistaKategorii = document.getElementById(`elistaKategorii${idOdView}`);
     },
 
     // metoda do aktualizowania wartości podsumowujących
@@ -238,7 +242,7 @@ const view = {
                 </select>
             </td>
             <td>
-                <input list="elistaKategorii${idOdView}" name="browser" id="ekategoria${idOdView}" class="listaKategorii">
+                <input list="elistaKategorii${idOdView}" id="ekategoria${idOdView}" class="listaKategorii">
                 <datalist id="elistaKategorii${idOdView}">
                 </datalist>
             </td>
@@ -271,7 +275,16 @@ const view = {
     // zaktualizuj treść komunikatu pod wartością przy edycji transakcji
     updateKomunikatWartoscE(komunikat){
         this.ewartoscKom.innerHTML = komunikat;
-    }
+    },
+
+    // zaktualizuj listę rozwijaną kategorii przy edycji transakcji
+    updateEdytujKategorie() {
+        this.elistaKategorii.innerHTML = "";
+        controller.getKategorie().forEach(element =>
+            this.elistaKategorii.innerHTML += `<option value=${element.nazwa}>`
+        );
+
+    },
 }
 
 const controller = {
@@ -328,9 +341,6 @@ const controller = {
             nowaKategoria.nazwa = view.dkategoria.value;
 
             model.kategorie.push(nowaKategoria);
-
-            view.updateDodajKategorie();
-            view.updateFiltrujKategorie();
         }
 
         model.transakcje.push(nowaTransakcja);
@@ -497,7 +507,7 @@ const controller = {
                 return transakcja.kategoria;
             }
         }
-    },
+    }
 }
 
 // inicjacja kontrolera
