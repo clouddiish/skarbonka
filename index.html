@@ -31,20 +31,28 @@
             <div class="col">
                 <label>Wartość: </label><br>
                 <input type="number" id="wartosc" step="0.01" placeholder="20"><br>
+                <p id="wartoscKom" class="komunikat"></p>
             </div>
 
             <div class="col">
                 <label>Typ: </label><br>
-                <input id="dtyp" placeholder="Wydatek/Przychód"><br>
+                <select id="dtyp">
+                    <option value="Wydatek">Wydatek</option>
+                    <option value="Przychód">Przychód</option>
+                </select><br>
             </div>
 
             <div class="col">
                 <label>Kategoria: </label><br>
-                <input id="dkat" placeholder="Jedzenie"><br>
+                <input list="listaKategorii" id="dkategoria" class="listaKategorii">
+
+                <datalist id="listaKategorii">
+                </datalist>
+
             </div>
         </div>
         <br>
-        <button id="dodajBTN">Dodaj</button>
+        <button id="dodajBTN" class="btn btn-light">Dodaj</button>
 
     </div>
 
@@ -72,17 +80,22 @@
 
                 <div class="col">
                     <label>Typ: </label><br>
-                    <input id="ftyp" placeholder="Wydatek/Przychód"><br>
+                    <select id="ftyp">
+                        <option value="">Wszystko</option>
+                        <option value="Wydatek">Wydatek</option>
+                        <option value="Przychód">Przychód</option>
+                    </select><br>
                 </div>
 
                 <div class="col">
                     <label>Kategoria: </label><br>
-                    <input id="fkat" placeholder="Jedzenie"><br>
+                    <select id="fkategorie">
+                    </select><br>
                 </div>
 
             </div>
             <br>
-            <button id="filtrujBTN">Filtruj</button>
+            <button id="filtrujBTN" class="btn btn-light">Filtruj</button>
 
         </div>
 
@@ -127,7 +140,33 @@
                         <th>Usuń</th>
                     </tr>
                 </thead>
-                <tbody id="cialoTabeli"></tbody>
+                <tbody id="cialoTabeli">
+                    <!-- HTML do edycji transakcji -->
+                    <!-- <tr>
+                        <td>
+                            <input type="date" id="edata" placeholder="2024-04-01">
+                        </td>
+                        <td>
+                            <input type="number" id="ewartosc" step="0.01" placeholder="20">
+                        </td>
+                        <td>
+                            <select id="etyp">
+                                <option value="Wydatek">Wydatek</option>
+                                <option value="Przychód">Przychód</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
+                            <datalist id="elistaKategorii">
+                        </td>
+                        <td>
+                            <button id="ezapiszBTN" class="save btn btn-light">Zapisz</button>
+                        </td>
+                        <td>
+                            <button id="eanulujBTN" class="cancel btn btn-light">Anuluj</button>
+                        </td>
+                    </tr> -->
+                </tbody>
             </table>
         </div>
 
