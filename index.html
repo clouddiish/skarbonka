@@ -16,123 +16,116 @@
 </head>
 
 <body>
-    <div class="mx-5 container">
-        <h1 class="m-5">Skarbonka</h1>
+    <div class="container">
 
-        <div class="m-5 container">
-            <h2 class="my-3 visually-hidden">Dodaj transakcję</h3>
+        <h1 class="my-5">Skarbonka</h1>
 
-            <div class="row">
+        <div class="row">
 
-                <div class="col">
-                    <label>Data: </label><br>
-                    <input type="date" id="data" placeholder="2024-04-01" class="form-control"><br>
-                </div>
+            <div class="col-10">
 
-                <div class="col">
-                    <label>Wartość: </label><br>
-                    <input type="number" id="wartosc" step="0.01" placeholder="20" class="form-control"><br>
-                    <p id="wartoscKom" class="komunikat"></p>
-                </div>
+                <div class="container mb-3">
+                    <h2 class="my-3 visually-hidden">Dodaj transakcję</h3>
 
-                <div class="col">
-                    <label>Typ: </label><br>
-                    <select id="dtyp" class="form-select">
-                        <option value="Wydatek">Wydatek</option>
-                        <option value="Przychód">Przychód</option>
-                    </select><br>
-                </div>
+                        <div class="row">
 
-                <div class="col">
-                    <label>Kategoria: </label><br>
-                    <input list="listaKategorii" id="dkategoria" class="listaKategorii form-control">
+                            <div class="col-2">
+                                <label for="data" class="mb-2">Data: </label>
+                            </div>
 
-                    <datalist id="listaKategorii">
-                    </datalist>
+                            <div class="col-2">
+                                <label for="wartosc" class="mb-2">Wartość: </label>
+                            </div>
 
-                </div>
-            </div>
+                            <div class="col-2">
+                                <label for="dtyp" class="mb-2">Typ: </label>
+                            </div>
 
-            <button id="dodajBTN" class="btn btn-light">Dodaj</button>
+                            <div class="col-5">
+                                <label for="dkategoria" class="mb-2">Kategoria: </label>
+                            </div>
 
-        </div>
-
-
-
-        <div class="container m-5">
-            <h2 class="my-3 visually-hidden">Historia</h2>
-
-            <div class="my-4">
-                <h3 class="my-3 visually-hidden">Filtruj</h3>
-
-                <div class="row">
-
-                    <!-- <div class="col">
-                    <label>Data od: </label><br>
-                    <input id="fdataod"><br>
-                    <button id="fdodBTN">Filtruj</button>
-                </div> -->
-
-                    <!-- <div class="col">
-                    <label>Data do: </label><br>
-                    <input id="fdatado"><br>
-                    <button id="fddoBTN">Filtruj</button>
-                </div> -->
-
-                    <div class="col">
-                        <label>Typ: </label><br>
-                        <select id="ftyp" class="form-select">
-                            <option value="">Wszystko</option>
-                            <option value="Wydatek">Wydatek</option>
-                            <option value="Przychód">Przychód</option>
-                        </select><br>
-                    </div>
-
-                    <div class="col">
-                        <label>Kategoria: </label><br>
-                        <select id="fkategorie" class="form-select">
-                        </select><br>
-                    </div>
-
-                </div>
-
-                <button id="filtrujBTN" class="btn btn-light">Filtruj</button>
-
-            </div>
-
-            <div class="my-5">
-                <h3 class="mb-4 visually-hidden">Podsumowanie</h3>
-
-                <div class="row my-3">
-                    <div class="col">
-                        <div class="border rounded pt-1">
-                            <p class="typ text-center">Przychody</p>
-                            <p class="text-center" id="sumaPrzychodow"></p>
                         </div>
-                    </div>
 
-                    <div class="col">
-                        <div class="border rounded pt-1">
-                            <p class="typ text-center">Wydatki</p>
-                            <p class="text-center" id="sumaWydatkow"></p>
-                        </div>
-                    </div>
+                        <div class="row">
 
-                    <div class="col ">
-                        <div class="border rounded pt-1">
-                            <p class="typ text-center">Bilans</p>
-                            <p class="text-center" id="wartoscBilansu"></p>
+                            <div class="col-2">
+                                <input type="date" id="data" placeholder="2024-04-01" class="form-control">
+                            </div>
+
+                            <div class="col-2">
+                                <input type="number" id="wartosc" step="0.01" placeholder="20" class="form-control">
+                                <p id="wartoscKom" class="komunikat"></p>
+                            </div>
+
+                            <div class="col-2">
+                                <select id="dtyp" class="form-select">
+                                    <option value="Wydatek">Wydatek</option>
+                                    <option value="Przychód">Przychód</option>
+                                </select>
+                            </div>
+
+                            <div class="col-4">
+                                <input list="listaKategorii" id="dkategoria" class="listaKategorii form-control">
+                                <datalist id="listaKategorii"></datalist>
+                            </div>
+
+                            <div class="col-1">
+                                <button id="dodajBTN" class="btn btn-light">Dodaj</button>
+                            </div>
                         </div>
-                    </div>
+
                 </div>
-            </div>
 
-            <div class="my-5">
-                <h3 class="visually-hidden">Lista transakcji</h3>
+                <div class="container mt-5 mb-3">
+
+                    <h3 class="visually-hidden">Lista transakcji</h3>
+
+                    <h3 class="my-3 visually-hidden">Filtruj</h3>
+
+                    <div class="row">
+
+                        <div class="col-5">
+                            <label for="ftyp" class="mb-2">Typ: </label>
+                        </div>
+
+                        <div class="col-5">
+                            <label for="fkategoria" class="mb-2">Kategoria: </label><br>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-5">
+
+                            <select id="ftyp" class="form-select">
+                                <option value="">Wszystko</option>
+                                <option value="Wydatek">Wydatek</option>
+                                <option value="Przychód">Przychód</option>
+                            </select><br>
+                        </div>
+
+                        <div class="col-5">
+
+                            <select id="fkategorie" class="form-select">
+                            </select>
+                        </div>
+
+                        <div class="col-2">
+
+                            <button id="filtrujBTN" class="btn btn-light">Filtruj</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            
+
+            <div class="container">
                 <table class="table my-3" id="tabelaTransakcji">
                     <thead>
                         <tr>
-                            <!-- <th>ID</th> -->
                             <th>Data</th>
                             <th>Wartość</th>
                             <th>Typ</th>
@@ -142,38 +135,43 @@
                         </tr>
                     </thead>
                     <tbody id="cialoTabeli">
-                        <!-- HTML do edycji transakcji -->
-                        <!-- <tr>
-                        <td>
-                            <input type="date" id="edata" placeholder="2024-04-01">
-                        </td>
-                        <td>
-                            <input type="number" id="ewartosc" step="0.01" placeholder="20">
-                        </td>
-                        <td>
-                            <select id="etyp">
-                                <option value="Wydatek">Wydatek</option>
-                                <option value="Przychód">Przychód</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input list="elistaKategorii" name="browser" id="ekategoria" class="listaKategorii">
-                            <datalist id="elistaKategorii">
-                        </td>
-                        <td>
-                            <button id="ezapiszBTN" class="save btn btn-light">Zapisz</button>
-                        </td>
-                        <td>
-                            <button id="eanulujBTN" class="cancel btn btn-light">Anuluj</button>
-                        </td>
-                    </tr> -->
+
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="col-2">
+
+            <div class="container">
+
+                <h3 class="visually-hidden">Podsumowanie</h3>
+
+                <div class="row">
+
+                    <div class="container mb-5 border rounded pt-1">
+                        <p class="typ text-center">Przychody</p>
+                        <p class="text-center" id="sumaPrzychodow"></p>
+                    </div>
+
+                    <div class="container border rounded pt-1">
+                        <p class="typ text-center">Wydatki</p>
+                        <p class="text-center" id="sumaWydatkow"></p>
+                    </div>
+
+                    <div class="container mt-5 border rounded pt-1">
+                        <p class="typ text-center">Bilans</p>
+                        <p class="text-center" id="wartoscBilansu"></p>
+                    </div>
+
+                </div>
             </div>
 
         </div>
 
     </div>
+    </div>
+
 
     <!--Bootstrap scripts-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -182,7 +180,6 @@
 
     <!--MVC script-->
     <script src="skarbonka.js"></script>
-
 </body>
 
 </html>

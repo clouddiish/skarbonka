@@ -11,3 +11,7 @@ html {
 .typ{
     font-weight: bold;
 }
+
+.btn {
+    background-color: gold;
+}
