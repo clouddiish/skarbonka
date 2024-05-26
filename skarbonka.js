@@ -125,6 +125,8 @@ const view = {
 
                 this.setDOMedycja(id);
                 controller.setEdytujTransakcje(id);
+                this.updateDodajKategorie();
+                this.updateFiltrujKategorie();
             }
         });
 
@@ -273,7 +275,7 @@ const view = {
     },
 
     // zaktualizuj treść komunikatu pod wartością przy edycji transakcji
-    updateKomunikatWartoscE(komunikat){
+    updateKomunikatWartoscE(komunikat) {
         this.ewartoscKom.innerHTML = komunikat;
     },
 
@@ -335,13 +337,8 @@ const controller = {
         nowaTransakcja.typ = view.dtyp.value;
 
         nowaTransakcja.kategoria = view.dkategoria.value;
-        if (!this.czyKategoriaIstnieje()) {
-            nowaKategoria = {};
-
-            nowaKategoria.nazwa = view.dkategoria.value;
-
-            model.kategorie.push(nowaKategoria);
-        }
+        if (!this.czyKategoriaIstnieje(nowaTransakcja.kategoria)) 
+            this.addNowaKategorie(nowaTransakcja.kategoria);
 
         model.transakcje.push(nowaTransakcja);
     },
@@ -453,6 +450,10 @@ const controller = {
             return;
         }
 
+        let nowaKategoria = view.ekategoria.value;
+        if (!this.czyKategoriaIstnieje(nowaKategoria)) 
+            this.addNowaKategorie(nowaKategoria);
+
         this.setWszystko();
 
         view.updateWartosci();
@@ -460,12 +461,18 @@ const controller = {
     },
 
     // sprawdź, czy kategoria wpisana przy dodawaniu transakcji już istnieje w modelu
-    czyKategoriaIstnieje() {
+    czyKategoriaIstnieje(nazwaKategorii) {
         for (let kategoria of model.kategorie) {
-            if (kategoria.nazwa == view.dkategoria.value) return true;
+            if (kategoria.nazwa == nazwaKategorii) return true;
         }
 
         return false;
+    },
+
+    addNowaKategorie(nazwaKategorii) {
+        nowaKategoria = {};
+        nowaKategoria.nazwa = nazwaKategorii;
+        model.kategorie.push(nowaKategoria);
     },
 
     // pobierz wszystkie kategorie z modelu
