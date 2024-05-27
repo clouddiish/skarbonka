@@ -41,7 +41,78 @@ const model = {
             wartosc: 1000,
             typ: "Przychód",
             kategoria: "Babcia"
+        },
+        {
+            id: 5,
+            data: "2024-04-17",
+            wartosc: 50,
+            typ: "Wydatek",
+            kategoria: "Transport"
+        },
+        {
+            id: 6,
+            data: "2024-04-17",
+            wartosc: 150,
+            typ: "Wydatek",
+            kategoria: "Jedzenie"
+        },
+        {
+            id: 7,
+            data: "2024-04-18",
+            wartosc: 300,
+            typ: "Wydatek",
+            kategoria: "Lekarz"
+        },
+        {
+            id: 8,
+            data: "2024-04-18",
+            wartosc: 500,
+            typ: "Wydatek",
+            kategoria: "Rachunki"
+        },
+        {
+            id: 9,
+            data: "2024-04-19",
+            wartosc: 80,
+            typ: "Wydatek",
+            kategoria: "Jedzenie"
+        },
+        {
+            id: 10,
+            data: "2024-04-19",
+            wartosc: 70,
+            typ: "Wydatek",
+            kategoria: "Ubrania"
+        },
+        {
+            id: 11,
+            data: "2024-04-20",
+            wartosc: 2500,
+            typ: "Wydatek",
+            kategoria: "Rachunki"
+        },
+        {
+            id: 12,
+            data: "2024-04-20",
+            wartosc: 100,
+            typ: "Wydatek",
+            kategoria: "Transport"
+        },
+        {
+            id: 13,
+            data: "2024-04-21",
+            wartosc: 1500,
+            typ: "Przychód",
+            kategoria: "Pensja"
+        },
+        {
+            id: 14,
+            data: "2024-04-21",
+            wartosc: 200,
+            typ: "Wydatek",
+            kategoria: "Ubrania"
         }
+        
     ],
 
     // lista kategorii
@@ -61,7 +132,20 @@ const model = {
         {
             nazwa: "Babcia",
             dotyczyTypu: "Przychód"
+        },
+        {
+            nazwa: "Transport",
+            dotyczyTypu: "Wydatek"
+        },
+        {
+            nazwa: "Rachunki",
+            dotyczyTypu: "Wydatek"
+        },
+        {
+            nazwa: "Ubrania",
+            dotyczyTypu: "Wydatek"
         }
+
     ]
 }
 
@@ -231,20 +315,20 @@ const view = {
 
         edytowanyWiersz.innerHTML = `
             <td>
-                <input type="date" id="edata${idOdView}" placeholder="2024-04-01">
+                <input type="date" id="edata${idOdView}" placeholder="2024-04-01" class="form-control">
             </td>
             <td>
-                <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20">
-                <p id="ewartoscKom${idOdView}" class="komunikat"></p>
+                <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20" class="form-control">
+                <p id="ewartoscKom${idOdView}" class="komunikat my-2"></p>
             </td>
             <td>
-                <select id="etyp${idOdView}">
+                <select id="etyp${idOdView}" class="form-control">
                     <option value="Wydatek">Wydatek</option>
                     <option value="Przychód">Przychód</option>
                 </select>
             </td>
             <td>
-                <input list="elistaKategorii${idOdView}" id="ekategoria${idOdView}" class="listaKategorii">
+                <input list="elistaKategorii${idOdView}" id="ekategoria${idOdView}" class="listaKategorii form-control">
                 <datalist id="elistaKategorii${idOdView}">
                 </datalist>
             </td>
@@ -330,7 +414,7 @@ const controller = {
             nowaTransakcja.wartosc = Number(view.wartosc.value);
             view.updateKomunikatWartosc("");
         } else {
-            view.updateKomunikatWartosc("Proszę podać liczbę");
+            view.updateKomunikatWartosc('<i class="bi bi-exclamation-circle"></i> Proszę podać liczbę');
             return;
         }
 
@@ -446,7 +530,7 @@ const controller = {
             }
             view.updateKomunikatWartoscE("");
         } else {
-            view.updateKomunikatWartoscE("Proszę podać liczbę");
+            view.updateKomunikatWartoscE('<i class="bi bi-exclamation-circle"></i> Proszę podać liczbę');
             return;
         }
 
