@@ -23,3 +23,9 @@ html {
 .kafelek {
     position: fixed;
 }
+
+@media (max-width: 768px){
+    .kafelek {
+        position: static;
+    }
+}
