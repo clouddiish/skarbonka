@@ -16,13 +16,16 @@
 </head>
 
 <body>
+    <div class="d-flex flex-fill align-self-stretch mb-5 sticky-top topka">
+        <div class="container">
+            <h1 class="my-3">
+                <i class="bi bi-piggy-bank-fill"></i>
+                Skarbonka
+            </h1>
+        </div>
+    </div>
+
     <div class="container">
-
-        <h1 class="my-5">
-            <i class="bi bi-piggy-bank-fill"></i>
-            Skarbonka
-        </h1>
-
         <div class="row">
 
             <div class="col-md-2 col-sm-12 order-md-last mb-5">
@@ -33,17 +36,17 @@
 
                         <div class="row kafelek">
 
-                            <div class="col-md-12 col-sm-4 container my-1 border rounded pt-1">
+                            <div class="col-md-12 col-sm-4 container my-1 border rounded pt-1 wartosc">
                                 <p class="typ text-center">Przychody</p>
                                 <p class="text-center" id="sumaPrzychodow"></p>
                             </div>
 
-                            <div class="col-md-12 col-sm-4 container my-1 border rounded pt-1">
+                            <div class="col-md-12 col-sm-4 container my-1 border rounded pt-1 wartosc">
                                 <p class="typ text-center">Wydatki</p>
                                 <p class="text-center" id="sumaWydatkow"></p>
                             </div>
 
-                            <div class="col-md-12 col-sm-4 container my-1 border rounded pt-1">
+                            <div class="col-md-12 col-sm-4 container my-1 border rounded pt-1 bilans">
                                 <p class="typ text-center">Bilans</p>
                                 <p class="text-center" id="wartoscBilansu"></p>
                             </div>
@@ -68,7 +71,7 @@
                             <div class="col-md-3 col-sm-12">
                                 <label for="wartosc" class="my-2">Wartość: </label>
                                 <input type="number" id="wartosc" step="0.01" placeholder="20" class="form-control">
-                                <p id="wartoscKom" class="komunikat"></p>
+                                <p id="wartoscKom" class="komunikat my-2"></p>
                             </div>
 
                             <div class="col-md-3 col-sm-12">
@@ -98,34 +101,34 @@
 
                 <div class="container mt-5 mb-3">
 
-                        <h2 class="my-3">Filtruj listę transakcji</h2>
+                    <h2 class="my-3">Filtruj listę transakcji</h2>
 
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="col-md-6 col-sm-12">
-                                <label for="ftyp" class="my-2">Typ: </label>
-                                <select id="ftyp" class="form-select">
-                                    <option value="">Wszystko</option>
-                                    <option value="Wydatek">Wydatek</option>
-                                    <option value="Przychód">Przychód</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-6 col-sm-12">
-                                <label for="fkategoria" class="my-2">Kategoria: </label>
-                                <select id="fkategorie" class="form-select">
-                                </select>
-                            </div>
-
+                        <div class="col-md-6 col-sm-12">
+                            <label for="ftyp" class="my-2">Typ: </label>
+                            <select id="ftyp" class="form-select">
+                                <option value="">Wszystko</option>
+                                <option value="Wydatek">Wydatek</option>
+                                <option value="Przychód">Przychód</option>
+                            </select>
                         </div>
 
-                        <div class="row justify-content-end mt-4 mb-5">
-
-                            <div class="col-md-2 col-sm-12">
-                                <button id="filtrujBTN" class="container btn btn-light">Filtruj</button>
-                            </div>
-
+                        <div class="col-md-6 col-sm-12">
+                            <label for="fkategoria" class="my-2">Kategoria: </label>
+                            <select id="fkategorie" class="form-select">
+                            </select>
                         </div>
+
+                    </div>
+
+                    <div class="row justify-content-end mt-4 mb-5">
+
+                        <div class="col-md-2 col-sm-12">
+                            <button id="filtrujBTN" class="container btn btn-light">Filtruj</button>
+                        </div>
+
+                    </div>
 
                 </div>
 

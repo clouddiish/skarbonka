@@ -16,8 +16,12 @@ html {
     background-color: gold;
 }
 
+.btn:hover{
+    background-color: lightgoldenrodyellow
+}
+
 .bi-piggy-bank-fill {
-    color: darkslategray;
+    color: gold;
 }
 
 .kafelek {
@@ -28,4 +32,35 @@ html {
     .kafelek {
         position: static;
     }
+}
+
+body {
+    background-color: #FBFBF8;
+}
+
+#tabelaTransakcji {
+    background-color: white;
+}
+
+.topka {
+    background-color: white;
+    
+}
+
+h1 {
+    font-weight: 600;
+    color: darkslategrey;
+}
+
+.wartosc {
+    background-color: #FCFCFC;
+}
+
+.bilans {
+    background-color: white;
+}
+
+.komunikat {
+    color: red;
+    font-weight: 600;
 }

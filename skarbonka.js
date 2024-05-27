@@ -319,7 +319,7 @@ const view = {
             </td>
             <td>
                 <input type="number" id="ewartosc${idOdView}" step="0.01" placeholder="20" class="form-control">
-                <p id="ewartoscKom${idOdView}" class="komunikat"></p>
+                <p id="ewartoscKom${idOdView}" class="komunikat my-2"></p>
             </td>
             <td>
                 <select id="etyp${idOdView}" class="form-control">
@@ -414,7 +414,7 @@ const controller = {
             nowaTransakcja.wartosc = Number(view.wartosc.value);
             view.updateKomunikatWartosc("");
         } else {
-            view.updateKomunikatWartosc("Proszę podać liczbę");
+            view.updateKomunikatWartosc('<i class="bi bi-exclamation-circle"></i> Proszę podać liczbę');
             return;
         }
 
@@ -530,7 +530,7 @@ const controller = {
             }
             view.updateKomunikatWartoscE("");
         } else {
-            view.updateKomunikatWartoscE("Proszę podać liczbę");
+            view.updateKomunikatWartoscE('<i class="bi bi-exclamation-circle"></i> Proszę podać liczbę');
             return;
         }
 
