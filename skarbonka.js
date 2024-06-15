@@ -166,7 +166,12 @@ const view = {
 
         // po naciśnieciu guzika "Dodaj" zapisanie wpisanych wartości do obiektu
         this.dodajBTN.addEventListener("click", () => {
-            controller.addTransakcja();
+            controller.dodajTransakcje(
+                this.data.value,
+                this.wartosc.value,
+                this.dtyp.value,
+                this.dkategoria.value
+            );
             controller.setWszystko();
             this.updateWartosci();
             this.updateTabela();
@@ -404,23 +409,23 @@ const controller = {
     },
 
     // dodaj nową transakcję wpisaną przez użytkownika do modelu 
-    addTransakcja() {
+    dodajTransakcje(data, wartosc, typ, kategoria) {
         nowaTransakcja = {};
 
         nowaTransakcja.id = model.transakcje[model.transakcje.length - 1].id + 1;
-        nowaTransakcja.data = view.data.value;
+        nowaTransakcja.data = data;
 
-        if (view.wartosc.value !== "") {
-            nowaTransakcja.wartosc = Number(view.wartosc.value);
+        if (wartosc !== "") {
+            nowaTransakcja.wartosc = Number(wartosc);
             view.updateKomunikatWartosc("");
         } else {
             view.updateKomunikatWartosc('<i class="bi bi-exclamation-circle"></i> Proszę podać liczbę');
             return;
         }
 
-        nowaTransakcja.typ = view.dtyp.value;
+        nowaTransakcja.typ = typ;
 
-        nowaTransakcja.kategoria = view.dkategoria.value;
+        nowaTransakcja.kategoria = kategoria;
         if (!this.czyKategoriaIstnieje(nowaTransakcja.kategoria)) 
             this.addNowaKategorie(nowaTransakcja.kategoria);
 
